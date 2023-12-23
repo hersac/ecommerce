@@ -1,8 +1,32 @@
 <?php
 
-use app\controllers\PruebaController;
+use app\controllers\ProductosController;
 
-$prueba = new PruebaController();
+$baseURL = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
 
-echo $prueba->getPruebas() . "<br>";
-echo $prueba->getPruebasById(1);
+$controller = new ProductosController();
+
+if(parse_url($baseURL, PHP_URL_PATH)){
+    switch ($method) {
+        case 'GET':
+            echo $controller->getProductos(); 
+            break;
+        
+        case 'POST':
+            # code...
+            break;
+        
+        case 'PUT':
+            # code...
+            break;
+        
+        case 'DELETE':
+            # code...
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+}
