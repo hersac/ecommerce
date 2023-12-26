@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /ecommerce/
+
+# Redirigir desde /ecommerce/api/ a /api/
+RewriteRule ^(.*)$ /api/$1 [L,R=301]
