@@ -74,12 +74,8 @@ class Routes {
     }
 
     private function errorHttp() {
-        $error = http_response_code(404);
-        $errorHttp = [
-            "Message" => "Resource no found",
-            "Status" => $error
-        ];
-
-        return json_encode($errorHttp);
+        header('HTTP/1.1 404 Not Found');
+        echo '404 Not Found';
+        exit();
     }
 }
