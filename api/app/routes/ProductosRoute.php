@@ -2,32 +2,24 @@
 
 namespace app\routes;
 
+use app\config\Routes;
 use app\controllers\ProductosController;
+
 
 class ProductosRoute {
     private $prodController;
+    private $routes;
 
     public function __construct() {
-        $this->prodController = new ProductosController();;
+        $this->prodController = new ProductosController();
+        $this->routes = new Routes();
     }
 
-    public function getProducts() {
-        echo $this->prodController->getProductos();
-    }
-
-    public function getProduct($id) {
-        echo $this->prodController->getProductoConId($id);
-    }
-
-    public function createProduct($entity) {
-        echo $this->prodController->createProducto($entity);
-    }
-
-    public function updateProduct($id, $entity) {
-        echo $this->prodController->updateProducto($id, $entity);
-    }
-
-    public function deleteProduct($id) {
-        echo $this->prodController->deleteProducto($id);
+    public function handlerRoutes(){
+        $this->routes->get("/productos", $this->prodController->getProductos());
+        $this->routes->get("/productos/:id", $this->prodController->getProductoConId());
+        $this->routes->post("/productos", $this->prodController->createProducto());
+        $this->routes->put("/productos", $this->prodController->updateProducto());
+        $this->routes->delete("/productos", $this->prodController->deleteProducto());
     }
 }
