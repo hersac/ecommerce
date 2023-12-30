@@ -79,7 +79,7 @@ class Entity {
 		$keysData = [];
 
 		foreach($request as $key => $value){
-			$valuesData[] = $value;
+			$valuesData[] = "'$value'";
 			$keysData[] = $key;
 		}
 
@@ -87,11 +87,11 @@ class Entity {
 		$keys = implode(', ', $keysData);
 
 		//Creación del registro
-		$query = $this->db->getConnection()->prepare("INSERT INTO $this->className ($keys) VALUES ($values)");
+		$query = $this->db->getConnection()->prepare("INSERT INTO $this->className ($keys) VALUES ($values);");
 		$query->execute();
 
 		//Respuesta de la creacion reciente
-		$response = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $keysData[0] = valuesData[0]");
+		$response = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $keysData[0] = $valuesData[0];");
 		$response->execute();
 		$data = $response->fetchAll(PDO::FETCH_ASSOC);
 		return json_encode($data);

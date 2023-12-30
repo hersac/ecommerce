@@ -28,9 +28,9 @@ class ProductosRoute {
         $body = json_decode($postData, true);
 
         $this->routes->get("/productos", $this->prodController->getProductos());
-        $this->routes->get("/productos", $this->prodController->getProductoConId($id));
+        //$this->routes->get("/productos", $this->prodController->getProductoConId($id));
         $this->routes->post("/productos", $this->prodController->createProducto($body));
-        $this->routes->put("/productos", $this->prodController->updateProducto($id, $body));
-        $this->routes->delete("/productos", $this->prodController->deleteProducto($id));
+        //$this->routes->put("/productos", $this->prodController->updateProducto($id, $body));
+        //$this->routes->delete("/productos", $this->prodController->deleteProducto($id));
     }
 }

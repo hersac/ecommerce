@@ -14,23 +14,20 @@ class Routes {
 
         $routeFinal = $this->baseRoute . $route;
 
-        echo $routeFinal;
-
         if ($_SERVER['REQUEST_URI'] === $routeFinal) {
             if ($_SERVER["REQUEST_METHOD"] === 'GET') {
                 header('Content-Type: application/json');
                 echo $controller;
                 exit();
-            } else {
-                //echo $this->errorHttp();
-            }
+            } 
+        } else {
+            echo $this->errorHttp();
         }
     }
 
     public function post($route, $controller) {
-        $routeFinal = $this->baseRoute . $route;
 
-        echo $routeFinal;
+        $routeFinal = $this->baseRoute . $route;
 
         if ($_SERVER['REQUEST_URI'] === $routeFinal) {
             if ($_SERVER["REQUEST_METHOD"] === 'POST') {
@@ -39,9 +36,9 @@ class Routes {
                 echo $controller;
 
                 exit();
-            } else {
-                //echo $this->errorHttp();
             }
+        } else {
+            echo $this->errorHttp();
         }
     }
 
@@ -55,9 +52,9 @@ class Routes {
                 echo $controller;
 
                 exit();
-            } else {
-                //echo $this->errorHttp();
             }
+        } else {
+            echo $this->errorHttp();
         }
     }
 
@@ -71,9 +68,9 @@ class Routes {
                 //echo $controller;
 
                 exit();
-            } else {
-                echo $this->errorHttp();
-            }
+            } 
+        } else {
+            echo $this->errorHttp();
         }
     }
 

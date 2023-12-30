@@ -10,6 +10,6 @@ class Productos {
 	private $price;
 	private $reference;
 	private $category;
-	private $oferta;
+	private $supply;
 	
 }
