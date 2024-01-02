@@ -2,30 +2,43 @@
 
 namespace app\config;
 
-class Routes {
+class Routes
+{
 
     private $baseRoute;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->baseRoute = '/api';
     }
 
-    public function get($route, $controller) {
+    public function get($route, $controller)
+    {
 
-        $routeFinal = $this->baseRoute . $route;
+        $url = $_SERVER['REQUEST_URI'];
+        $pattern = "#/(\w+)/(\w+)/(\d+)#";
+        preg_match($pattern, $url, $matches);
 
-        if ($_SERVER['REQUEST_URI'] === $routeFinal) {
-            if ($_SERVER["REQUEST_METHOD"] === 'GET') {
+        $id = isset($matches[3]) ? $matches[3] : null;
+        $routeFinal = isset($matches[3]) ? $this->baseRoute . $route . "/$matches[3]" : $this->baseRoute . $route;
+
+        if ($url === $routeFinal) {
+            if ($_SERVER["REQUEST_METHOD"] === 'GET' && is_numeric($id)) {
                 header('Content-Type: application/json');
                 echo $controller;
                 exit();
-            } 
+            } else{
+                header('Content-Type: application/json');
+                echo $controller;
+                exit();
+            }
         } else {
             echo $this->errorHttp();
         }
     }
 
-    public function post($route, $controller) {
+    public function post($route, $controller)
+    {
 
         $routeFinal = $this->baseRoute . $route;
 
@@ -42,7 +55,8 @@ class Routes {
         }
     }
 
-    public function put($route, $controller) {
+    public function put($route, $controller)
+    {
         $routeFinal = $this->baseRoute . $route;
 
         if ($_SERVER['REQUEST_URI'] === $routeFinal) {
@@ -58,7 +72,8 @@ class Routes {
         }
     }
 
-    public function delete($route, $controller) {
+    public function delete($route, $controller)
+    {
         $routeFinal = $this->baseRoute . $route;
 
         if ($_SERVER['REQUEST_URI'] === $routeFinal) {
@@ -68,13 +83,14 @@ class Routes {
                 //echo $controller;
 
                 exit();
-            } 
+            }
         } else {
             echo $this->errorHttp();
         }
     }
 
-    private function errorHttp() {
+    private function errorHttp()
+    {
         header('HTTP/1.1 404 Not Found');
         echo '404 Not Found';
         exit();
