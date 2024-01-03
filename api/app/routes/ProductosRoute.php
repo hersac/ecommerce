@@ -2,32 +2,76 @@
 
 namespace app\routes;
 
-use app\config\Routes;
 use app\controllers\ProductosController;
 
 
 class ProductosRoute {
     private $prodController;
-    private $routes;
 
     public function __construct() {
         $this->prodController = new ProductosController();
-        $this->routes = new Routes();
     }
 
     public function handlerRoutes(){
 
         $url = $_SERVER['REQUEST_URI'];
-        $partesURL = explode('/', $url);
-        $id = end($partesURL);
+        $method = $_SERVER["REQUEST_METHOD"];
+
+        $pattern = "#/(\w+)/(\w+)/(\d+)#";
+        preg_match($pattern, $url, $matches);
+
+        $id = isset($matches[3]) ? $matches[3] : null;
+        $base = isset($matches[3]) ? $matches[2] : null;
 
         $postData = file_get_contents("php://input");
         $body = json_decode($postData, true);
 
-        $this->routes->get("/productos", $this->prodController->getProductos());
-        $this->routes->get("/productos", $this->prodController->getProductoConId($id));
-        $this->routes->post("/productos", $this->prodController->createProducto($body));
-        //$this->routes->put("/productos", $this->prodController->updateProducto($id, $body));
-        //$this->routes->delete("/productos", $this->prodController->deleteProducto($id));
+        if ($url === "/api/productos") {
+            header('Content-Type: application/json');
+            switch($method){
+                case 'GET':
+                    echo $this->prodController->getProductos();
+                    exit();
+                case 'POST':
+                    echo $this->prodController->createProducto($body);
+                    exit();
+                default:
+                    echo $this->errorHttp();
+                    break;
+            }
+
+        } elseif ("/$base" === "/productos" && is_numeric($id)) {
+            header('Content-Type: application/json');
+            switch($method){
+                case 'GET':
+                    echo $this->prodController->getProductoConId($id);
+                    exit();
+                case 'PUT':
+                    echo $this->prodController->updateProducto($id, $body);
+                    exit();
+                case 'DELETE':
+                    echo $this->prodController->deleteProducto($id);
+                    exit();
+                default:
+                    echo $this->errorHttp();
+                    break;
+            }
+        } else {
+            echo $this->errorHttp();
+        }
+    }
+
+    private function errorHttp()
+    {
+        header('HTTP/1.1 404 Not Found');
+
+        $response = [
+            'message'=>'404 Not Found',
+            'status'=>'404'
+        ];
+
+        $json =json_encode($response);
+        echo $json;
+        exit();
     }
 }
