@@ -104,7 +104,7 @@ class Entity {
 		$updateData = [];
 
 		foreach($request as $key => $value){
-			$updateData = "$key = $value";
+			$updateData[] = "$key = '$value'";
 		}
 
 		$values = implode(', ', $updateData);
