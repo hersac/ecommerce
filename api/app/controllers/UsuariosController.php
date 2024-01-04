@@ -2,57 +2,61 @@
 
 namespace app\controllers;
 
-use app\models\Clientes;
+use app\models\Usuarios;
 use app\config\Entity;
 use app\config\Error;
 
-class ClientesController {
-    private $clientes;
+class UsuariosController
+{
+    private $usuarios;
     private $entity;
 
-    public function __construct() {
-        $this->clientes = new Clientes();
-        $this->entity = new Entity(get_class($this->clientes));
+    public function __construct()
+    {
+        $this->usuarios = new Usuarios();
+        $this->entity = new Entity(get_class($this->usuarios));
     }
 
-    public function getClientes(){
+    public function getUsuarios()
+    {
         return json_encode($this->entity->findAll());
     }
-    
-    public function getClienteConId($id){
+
+    public function getUsuarioConId($id)
+    {
         $data = $this->entity->findById($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Usuario no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function createCliente($entity){
+    public function createUsuario($entity)
+    {
         return json_encode($this->entity->save($entity));
     }
 
-    public function updateCliente($id, $entity){
+    public function updateUsuario($id, $entity)
+    {
         $data = $this->entity->update($id, $entity);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Usuario no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function deleteCliente($id){
+    public function deleteUsuario($id)
+    {
         $data = $this->entity->delete($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Usuario no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
-
 }
-
-?>

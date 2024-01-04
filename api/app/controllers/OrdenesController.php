@@ -2,51 +2,51 @@
 
 namespace app\controllers;
 
-use app\models\Clientes;
+use app\models\Ordenes;
 use app\config\Entity;
 use app\config\Error;
 
-class ClientesController {
-    private $clientes;
+class OrdenesController {
+    private $ordenes;
     private $entity;
 
     public function __construct() {
-        $this->clientes = new Clientes();
-        $this->entity = new Entity(get_class($this->clientes));
+        $this->ordenes = new Ordenes();
+        $this->entity = new Entity(get_class($this->ordenes));
     }
 
-    public function getClientes(){
+    public function getOrdenes(){
         return json_encode($this->entity->findAll());
     }
     
-    public function getClienteConId($id){
+    public function getOrdenConId($id){
         $data = $this->entity->findById($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Orden no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function createCliente($entity){
+    public function createOrden($entity){
         return json_encode($this->entity->save($entity));
     }
 
-    public function updateCliente($id, $entity){
+    public function updateOrden($id, $entity){
         $data = $this->entity->update($id, $entity);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Orden no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function deleteCliente($id){
+    public function deleteOrden($id){
         $data = $this->entity->delete($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Orden no se encuentra");
             return null;
         } else {
             return json_encode($data);

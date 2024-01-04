@@ -2,51 +2,51 @@
 
 namespace app\controllers;
 
-use app\models\Clientes;
+use app\models\DetallesCC;
 use app\config\Entity;
 use app\config\Error;
 
-class ClientesController {
-    private $clientes;
+class DetallesCCController {
+    private $detallesCC;
     private $entity;
 
     public function __construct() {
-        $this->clientes = new Clientes();
-        $this->entity = new Entity(get_class($this->clientes));
+        $this->detallesCC = new DetallesCC();
+        $this->entity = new Entity(get_class($this->detallesCC));
     }
 
-    public function getClientes(){
+    public function getDetallesCC(){
         return json_encode($this->entity->findAll());
     }
     
-    public function getClienteConId($id){
+    public function getDetalleCCConId($id){
         $data = $this->entity->findById($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Detalles del carrito no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function createCliente($entity){
+    public function createDetalleCC($entity){
         return json_encode($this->entity->save($entity));
     }
 
-    public function updateCliente($id, $entity){
+    public function updateDetalleCC($id, $entity){
         $data = $this->entity->update($id, $entity);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Detalles del carrito no se encuentra");
             return null;
         } else {
             return json_encode($data);
         }
     }
 
-    public function deleteCliente($id){
+    public function deleteDetalleCC($id){
         $data = $this->entity->delete($id);
         if (empty($data)) {
-            $error = new Error(400, "Cliente no se encuentra");
+            $error = new Error(400, "Detalles del carrito no se encuentra");
             return null;
         } else {
             return json_encode($data);

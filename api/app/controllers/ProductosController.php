@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Productos;
 use app\config\Entity;
+use app\config\Error;
 
 class ProductosController {
     private $productos;
@@ -15,23 +16,41 @@ class ProductosController {
     }
 
     public function getProductos(){
-        return $this->entity->findAll();
+        return json_encode($this->entity->findAll());
     }
     
     public function getProductoConId($id){
-        return $this->entity->findById($id);
+        $data = $this->entity->findById($id);
+        if (empty($data)) {
+            $error = new Error(400, "Producto no se encuentra");
+            return null;
+        } else {
+            return json_encode($data);
+        }
     }
 
     public function createProducto($entity){
-        return $this->entity->save($entity);
+        return json_encode($this->entity->save($entity));
     }
 
     public function updateProducto($id, $entity){
-        return $this->entity->update($id, $entity);
+        $data = $this->entity->update($id, $entity);
+        if (empty($data)) {
+            $error = new Error(400, "Producto no se encuentra");
+            return null;
+        } else {
+            return json_encode($data);
+        }
     }
 
     public function deleteProducto($id){
-        return $this->entity->delete($id);
+        $data = $this->entity->delete($id);
+        if (empty($data)) {
+            $error = new Error(400, "Producto no se encuentra");
+            return null;
+        } else {
+            return json_encode($data);
+        }
     }
 
 }

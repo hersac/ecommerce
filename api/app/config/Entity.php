@@ -61,14 +61,14 @@ class Entity {
 		$query = $this->db->getConnection()->prepare("SELECT * FROM $this->className");
 		$query->execute();
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
-		return json_encode($data);
+		return $data;
 	}
 
 	public function findById($id){
 		$query = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $this->columnNameId = $id");
 		$query->execute();
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
-		return json_encode($data);
+		return $data;
 	}
 
 	public function save($request){
@@ -94,7 +94,7 @@ class Entity {
 		$response = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $keysData[0] = $valuesData[0];");
 		$response->execute();
 		$data = $response->fetchAll(PDO::FETCH_ASSOC);
-		return json_encode($data);
+		return $data;
 	}
 
 	public function update($id, $request){
@@ -117,14 +117,14 @@ class Entity {
 		$response = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $this->columnNameId = $id");
 		$response->execute();
 		$data = $response->fetchAll(PDO::FETCH_ASSOC);
-		return json_encode($data);
+		return $data;
 	}
 
 	public function delete($id){
 		$query = $this->db->getConnection()->prepare("DELETE FROM $this->className WHERE $this->columnNameId = $id");
 		$query->execute();
 		$data = ['message'=>'Eliminado correctamente'];
-		return json_encode($data);
+		return $data;
 	}
 
 }

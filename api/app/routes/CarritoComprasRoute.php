@@ -3,14 +3,14 @@
 namespace app\routes;
 
 use app\config\Error;
-use app\controllers\ProductosController;
+use app\controllers\CarritoComprasController;
 use app\interfaces\RouterInterface;
 
-class ProductosRoute implements RouterInterface {
-    private $prodController;
+class CarritoComprasRoute implements RouterInterface {
+    private $carritoComprasController;
 
     public function __construct() {
-        $this->prodController = new ProductosController();
+        $this->carritoComprasController = new CarritoComprasController();
     }
 
     public function handlerRoutes(){
@@ -27,31 +27,31 @@ class ProductosRoute implements RouterInterface {
         $postData = file_get_contents("php://input");
         $body = json_decode($postData, true);
 
-        if ($url === "/api/productos") {
+        if ($url === "/api/carritocompras") {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductos();
+                    echo $this->carritoComprasController->getCarritosCompras();
                     exit();
                 case 'POST':
-                    echo $this->prodController->createProducto($body);
+                    echo $this->carritoComprasController->createCarritoCompras($body);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
 
-        } elseif ("/$base" === "/productos" && is_numeric($id)) {
+        } elseif ("/$base" === "/carritocompras" && is_numeric($id)) {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductoConId($id);
+                    echo $this->carritoComprasController->getCarritoComprasConId($id);
                     exit();
                 case 'PUT':
-                    echo $this->prodController->updateProducto($id, $body);
+                    echo $this->carritoComprasController->updateCarritoCompras($id, $body);
                     exit();
                 case 'DELETE':
-                    echo $this->prodController->deleteProducto($id);
+                    echo $this->carritoComprasController->deleteCarritoCompras($id);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
@@ -61,4 +61,5 @@ class ProductosRoute implements RouterInterface {
             $error = new Error(404, "Not Found");
         }
     }
+
 }

@@ -3,14 +3,14 @@
 namespace app\routes;
 
 use app\config\Error;
-use app\controllers\ProductosController;
+use app\controllers\ClientesController;
 use app\interfaces\RouterInterface;
 
-class ProductosRoute implements RouterInterface {
-    private $prodController;
+class ClientesRoute implements RouterInterface {
+    private $clientController;
 
     public function __construct() {
-        $this->prodController = new ProductosController();
+        $this->clientController = new ClientesController();
     }
 
     public function handlerRoutes(){
@@ -27,31 +27,31 @@ class ProductosRoute implements RouterInterface {
         $postData = file_get_contents("php://input");
         $body = json_decode($postData, true);
 
-        if ($url === "/api/productos") {
+        if ($url === "/api/clientes") {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductos();
+                    echo $this->clientController->getClientes();
                     exit();
                 case 'POST':
-                    echo $this->prodController->createProducto($body);
+                    echo $this->clientController->createCliente($body);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
 
-        } elseif ("/$base" === "/productos" && is_numeric($id)) {
+        } elseif ("/$base" === "/clientes" && is_numeric($id)) {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductoConId($id);
+                    echo $this->clientController->getClienteConId($id);
                     exit();
                 case 'PUT':
-                    echo $this->prodController->updateProducto($id, $body);
+                    echo $this->clientController->updateCliente($id, $body);
                     exit();
                 case 'DELETE':
-                    echo $this->prodController->deleteProducto($id);
+                    echo $this->clientController->deleteCliente($id);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");

@@ -3,14 +3,14 @@
 namespace app\routes;
 
 use app\config\Error;
-use app\controllers\ProductosController;
+use app\controllers\DetallesCCController;
 use app\interfaces\RouterInterface;
 
-class ProductosRoute implements RouterInterface {
-    private $prodController;
+class DetallesCCRoute implements RouterInterface {
+    private $detallesCCController;
 
     public function __construct() {
-        $this->prodController = new ProductosController();
+        $this->detallesCCController = new DetallesCCController();
     }
 
     public function handlerRoutes(){
@@ -27,31 +27,31 @@ class ProductosRoute implements RouterInterface {
         $postData = file_get_contents("php://input");
         $body = json_decode($postData, true);
 
-        if ($url === "/api/productos") {
+        if ($url === "/api/detallescc") {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductos();
+                    echo $this->detallesCCController->getDetallesCC();
                     exit();
                 case 'POST':
-                    echo $this->prodController->createProducto($body);
+                    echo $this->detallesCCController->createDetalleCC($body);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
 
-        } elseif ("/$base" === "/productos" && is_numeric($id)) {
+        } elseif ("/$base" === "/detallescc" && is_numeric($id)) {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductoConId($id);
+                    echo $this->detallesCCController->getDetalleCCConId($id);
                     exit();
                 case 'PUT':
-                    echo $this->prodController->updateProducto($id, $body);
+                    echo $this->detallesCCController->updateDetalleCC($id, $body);
                     exit();
                 case 'DELETE':
-                    echo $this->prodController->deleteProducto($id);
+                    echo $this->detallesCCController->deleteDetalleCC($id);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
