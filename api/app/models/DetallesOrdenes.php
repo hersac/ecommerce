@@ -2,10 +2,12 @@
 
 namespace app\models;
 
+use app\models\Productos;
+
 class DetallesOrdenes {
-	private $detalleOId;
-	private $ordenID;
-	private $productID;
-	private $cantidad;
-	private $subtotal;
+	private int $detalleId;
+	private int $ordenId;
+	private Productos $prodId;
+	private int $cantidad;
+	private int $subtotal;
 }

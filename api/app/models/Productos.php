@@ -3,11 +3,11 @@
 namespace app\models;
 
 class Productos {
-	private $prodId;
-	private $prodName;
-	private $description;
-	private $price;
-	private $reference;
-	private $category;
-	private $supply;
+	private int $prodId;
+	private string $prodName;
+	private string $description;
+	private int $price;
+	private string $reference;
+	private string $category;
+	private string $supply;
 }

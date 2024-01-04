@@ -3,9 +3,9 @@
 namespace app\models;
 
 class CarritoCompras {
-	private $carritoId;
-	private $usuarioID;
-	private $cardID;
-	private $fecha;
-	private $estadoCarrito;
+	private int $carritoId;
+	private int $usuarioId;
+	private string $cardId;
+	private string $fecha;
+	private bool $estadoCarrito;
 }

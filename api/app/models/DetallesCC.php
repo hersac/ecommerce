@@ -3,10 +3,10 @@
 namespace app\models;
 
 class DetallesCC {
-	private $detalleId;
-	private $cartID;
-	private $productID;
-	private $cantidad;
-	private $precioUnitario;
-	private $subtotal;
+	private int $detalleId;
+	private int $cartId;
+	private int $productId;
+	private int $cantidad;
+	private int $precioUnitario;
+	private int $subtotal;
 }

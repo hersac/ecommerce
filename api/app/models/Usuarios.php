@@ -3,13 +3,13 @@
 namespace app\models;
 
 class Usuarios{
-	private $userId;
-	private $username;
-	private $password;
-	private $primerNombre;
-	private $segundoNombre;
-	private $primerApellido;
-	private $segundoApellido;
-	private $documentoID;
-	private $direccion;
+	private int $userId;
+	private string $username;
+	private string $password;
+	private string $primerNombre;
+	private string $segundoNombre;
+	private string $primerApellido;
+	private string $segundoApellido;
+	private string$documentoId;
+	private string $direccion;
 }

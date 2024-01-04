@@ -23,22 +23,42 @@ class Entity {
 			$reflection = new ReflectionClass($class);
 			$properties = $reflection->getProperties(ReflectionProperty::IS_PRIVATE);
 			$columnsData = [];
+			$count=1;
 
 			foreach($properties as $props){
 				$propName = $this->camelToSnakeCase($props->getName());
+				$typeData = $props->getType()->getName();
 
-				if(strpos($propName, '_id') !== false){
+				$data = strpos($typeData, 'app\models\\') !== false ? 'class' : $typeData;
+
+				$columnDefined = '';
+
+				if($count === 1){
 					$this->columnNameId = $propName;
 					$columnDefined = "$propName SERIAL PRIMARY KEY";
 				} else {
-					$columnDefined = "$propName VARCHAR(255)";
+					switch ($data) {
+						case 'int':
+							$columnDefined = "$propName INTEGER";
+							break;
+						case 'string':
+							$columnDefined = "$propName VARCHAR(255)";
+							break;
+						case 'bool':
+							$columnDefined = "$propName BOOLEAN";
+							break;
+						case 'class':
+							$classProperty = basename(str_replace("\\", "/", $typeData));
+							$columnDefined = "$propName INTEGER REFERENCES $classProperty($propName)";
+							echo $columnDefined;
+							break;
+					}
 				}
-				
+
 				$columnsData[] = $columnDefined;
+				$count++;
 			}
-
 			
-
 			$columns = implode(", ", $columnsData);
 
 			$this->db = new DBConfig();
