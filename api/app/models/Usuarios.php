@@ -10,6 +10,6 @@ class Usuarios{
 	private string $segundoNombre;
 	private string $primerApellido;
 	private string $segundoApellido;
-	private string$documentoId;
+	private string $documentoId;
 	private string $direccion;
 }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\auth\GenerateJWT;
 use app\models\CarritoCompras;
 use app\config\Entity;
 use app\config\Error;
@@ -9,14 +10,19 @@ use app\config\Error;
 class CarritoComprasController {
     private $carritoCompras;
     private $entity;
+    private $validationToken;
 
     public function __construct() {
         $this->carritoCompras = new CarritoCompras();
         $this->entity = new Entity(get_class($this->carritoCompras));
+        $this->validationToken = new GenerateJWT();
     }
 
-    public function getCarritosCompras(){
-        return json_encode($this->entity->findAll());
+    public function getCarritosCompras($token){
+        if(!$this->validationToken->validateToken($token))
+            throw new Error(401, "Unauthorized request");
+
+        return json_encode($this->entity->findAll()); 
     }
     
     public function getCarritoComprasConId($id){

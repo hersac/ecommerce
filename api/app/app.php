@@ -1,5 +1,6 @@
 <?php
 
+use app\auth\AuthJWT;
 use app\config\Error;
 use app\config\Router;
 use app\routes\ProductosRoute;
@@ -9,7 +10,8 @@ use app\routes\CarritoComprasRoute;
 use app\routes\DetallesCCRoute;
 use app\routes\OrdenesRoute;
 use app\routes\DetallesORoute;
-
+use app\routes\RolesRoute;
+use app\routes\SessionRoute;
 
 $url = $_SERVER['REQUEST_URI'];
 $router = new Router();
@@ -41,9 +43,16 @@ switch ($urlToValidate) {
 	case 'detallesordenes':
 		$router->addRoute(new DetallesORoute());
 		break;
+	case 'roles':
+		$router->addRoute(new RolesRoute());
+		break;
+	case 'session':
+		$router->addRoute(new SessionRoute());
+		break;
 	default:
 		$error = new Error(404, "Not Found");
 		break;
 }
 
 $router->handleRoutes();
+

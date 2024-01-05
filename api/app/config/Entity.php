@@ -147,4 +147,14 @@ class Entity {
 		return $data;
 	}
 
+	public function findByParameter($parameter, $value){
+
+		$fildName = $this->camelToSnakeCase($parameter);
+
+		$query = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE fildName = $parameter");
+		$query->execute();
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+		return $data;
+	}
+
 }
