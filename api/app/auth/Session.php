@@ -6,34 +6,38 @@ use app\auth\AuthJWT;
 use app\controllers\UsuariosController;
 
 class Session {
-	private $authJWT;
-	private $userController;
+    private $authJWT;
+    private $userController;
 
-	public function loginValidate($body){
+    public function loginValidate($body) {
+        $requestData = [];
 
-		$user = '';
-		$password = '';
+        foreach($body as $key => $value) {
+            $requestData[] = $value;
+        }
 
-		foreach($body as $key => $value){
-			if($key === 'username'){
-				$user = $value;
-			} if($key === 'password'){
-				$password = $value;
-			} else {
-				return null;
-			}
-		}
+        $auth = $this->authJWT = new AuthJWT("ACCESS");
+        $this->userController = new UsuariosController();
 
-		$auth = $this->authJWT = new AuthJWT("ACCESS");
-		$this->userController = new UsuariosController();
-		$data = $this->userController->getUsuarioConCorreo($user);
+        $data = json_decode($this->userController->getUsuarioConCorreo($requestData[0]), true);
 
-		if(empty($data)){
-			return false;
-		} elseif($data['password'] === $password) {
-			$expiration = $expiration = time() + (24 * 3600);
-			$token = $auth->tokenGenerate($data, $expiration);
-			return $token;
-		}
-	}
+        if(empty($data)) {
+            return false;
+        }
+
+        if($data[0]['password'] === $requestData[1]) {
+            $expiration = time() + (24 * 3600);
+            $token = $auth->tokenGenerate($data, $expiration);
+
+            $response = [
+            	'message'=>'Ok',
+            	'status'=>200,
+            	'token'=>$token,
+            ];
+
+            return json_encode($response);
+        } else {
+            return false;
+        }
+    }
 }

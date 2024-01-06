@@ -151,7 +151,7 @@ class Entity {
 
 		$fildName = $this->camelToSnakeCase($parameter);
 
-		$query = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE fildName = $parameter");
+		$query = $this->db->getConnection()->prepare("SELECT * FROM $this->className WHERE $fildName = '$value'");
 		$query->execute();
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
 		return $data;

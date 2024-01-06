@@ -62,6 +62,7 @@ class UsuariosController
 
     public function getUsuarioConCorreo($username){
         $data = $this->entity->findByParameter('username', $username);
+
         if (empty($data)) {
             $error = new Error(400, "Usuario no se encuentra");
             return null;
