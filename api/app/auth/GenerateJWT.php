@@ -10,11 +10,11 @@ class GenerateJWT {
 	private $authJWT;
 
 	public function __construct(){
-		$this->secret = 'HERSAC';
+		$this->secret = 'ACCESS';
 		$this->authJWT = new AuthJWT($this->secret);
 	}
 
-	public function validateToken($token) {
+    public function validateToken($token) {
 		$jwt = $this->authJWT;
 		return $jwt->tokenValidate($token);
 	}

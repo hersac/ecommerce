@@ -18,7 +18,6 @@ class SessionRoute implements RouterInterface {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
-
         $pattern = "#/(\w+)/(\w+)#";
         preg_match($pattern, $url, $matches);
 

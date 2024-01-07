@@ -6,14 +6,17 @@ use app\config\Error;
 use app\controllers\CarritoComprasController;
 use app\interfaces\RouterInterface;
 
-class CarritoComprasRoute implements RouterInterface {
+class CarritoComprasRoute implements RouterInterface
+{
     private $carritoComprasController;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->carritoComprasController = new CarritoComprasController();
     }
 
-    public function handlerRoutes(){
+    public function handlerRoutes()
+    {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
@@ -29,29 +32,28 @@ class CarritoComprasRoute implements RouterInterface {
 
         if ($url === "/api/carritocompras") {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
                     echo $this->carritoComprasController->getCarritosCompras($token);
                     exit();
                 case 'POST':
-                    echo $this->carritoComprasController->createCarritoCompras($body);
+                    echo $this->carritoComprasController->createCarritoCompras($body, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
-
-        } elseif ("/$base" === "/carritocompras" && is_numeric($id)) {
+        } elseif ("/$base" === "/carritocompras" && is_numeric($id, $token)) {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
-                    echo $this->carritoComprasController->getCarritoComprasConId($id);
+                    echo $this->carritoComprasController->getCarritoComprasConId($id, $token);
                     exit();
                 case 'PUT':
-                    echo $this->carritoComprasController->updateCarritoCompras($id, $body);
+                    echo $this->carritoComprasController->updateCarritoCompras($id, $body, $token);
                     exit();
                 case 'DELETE':
-                    echo $this->carritoComprasController->deleteCarritoCompras($id);
+                    echo $this->carritoComprasController->deleteCarritoCompras($id, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
@@ -61,5 +63,4 @@ class CarritoComprasRoute implements RouterInterface {
             $error = new Error(404, "Not Found");
         }
     }
-
 }

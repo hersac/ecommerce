@@ -10,6 +10,7 @@ class Session {
     private $userController;
 
     public function loginValidate($body) {
+
         $requestData = [];
 
         foreach($body as $key => $value) {

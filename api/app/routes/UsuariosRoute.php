@@ -17,7 +17,8 @@ class UsuariosRoute implements RouterInterface {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
-
+        $headers = getallheaders();
+        $token = isset($headers['Authorization']) ? $headers['Authorization'] : null;
         $pattern = "#/(\w+)/(\w+)/(\d+)#";
         preg_match($pattern, $url, $matches);
 
@@ -31,10 +32,10 @@ class UsuariosRoute implements RouterInterface {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->userController->getUsuarios();
+                    echo $this->userController->getUsuarios($token);
                     exit();
                 case 'POST':
-                    echo $this->userController->createUsuario($body);
+                    echo $this->userController->createUsuario($body, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
@@ -45,13 +46,13 @@ class UsuariosRoute implements RouterInterface {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->userController->getUsuarioConId($id);
+                    echo $this->userController->getUsuarioConId($id, $token);
                     exit();
                 case 'PUT':
-                    echo $this->userController->updateUsuario($id, $body);
+                    echo $this->userController->updateUsuario($id, $body, $token);
                     exit();
                 case 'DELETE':
-                    echo $this->userController->deleteUsuario($id);
+                    echo $this->userController->deleteUsuario($id, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");

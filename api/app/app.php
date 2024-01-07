@@ -1,6 +1,5 @@
 <?php
 
-use app\auth\AuthJWT;
 use app\config\Error;
 use app\config\Router;
 use app\routes\ProductosRoute;
@@ -15,10 +14,8 @@ use app\routes\SessionRoute;
 
 $url = $_SERVER['REQUEST_URI'];
 $router = new Router();
-
 $pattern = "#/(\w+)/(\w+)#";
 preg_match($pattern, $url, $matches);
-
 $urlToValidate = isset($matches[2]) ? $matches[2] : null;
 
 switch ($urlToValidate) {

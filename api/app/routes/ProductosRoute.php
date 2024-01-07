@@ -17,7 +17,8 @@ class ProductosRoute implements RouterInterface {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
-
+        $headers = getallheaders();
+        $token = isset($headers['Authorization']) ? $headers['Authorization'] : null;
         $pattern = "#/(\w+)/(\w+)/(\d+)#";
         preg_match($pattern, $url, $matches);
 
@@ -31,10 +32,10 @@ class ProductosRoute implements RouterInterface {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductos();
+                    echo $this->prodController->getProductos($token);
                     exit();
                 case 'POST':
-                    echo $this->prodController->createProducto($body);
+                    echo $this->prodController->createProducto($body, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
@@ -45,13 +46,13 @@ class ProductosRoute implements RouterInterface {
             header('Content-Type: application/json');
             switch($method){
                 case 'GET':
-                    echo $this->prodController->getProductoConId($id);
+                    echo $this->prodController->getProductoConId($id, $token);
                     exit();
                 case 'PUT':
-                    echo $this->prodController->updateProducto($id, $body);
+                    echo $this->prodController->updateProducto($id, $body, $token);
                     exit();
                 case 'DELETE':
-                    echo $this->prodController->deleteProducto($id);
+                    echo $this->prodController->deleteProducto($id, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");

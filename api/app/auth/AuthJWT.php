@@ -28,12 +28,14 @@ class AuthJWT {
 		return "$header.$payload.$encodedSignature";
 	}
 
-	public function tokenValidate($token){
+    public function tokenValidate($token){
 		list($header, $payload, $signature) = explode(".", $token);
-		$decodeHeader = json_decode(base64_decode($header), true);
+		$headerWithoutBearer = substr($header, 7);
+		//$decodeHeader = json_decode(base64_decode($headerWithoutBearer), true);
 		$decodePayload = json_decode(base64_decode($payload), true);
-		$expectedSignature = base64_encode(hash_hmac($this->algorithm, "$header.$payload", $this->secretKey, true));
-		return hash_equals($signature, $expectedSignature) && time() <= $decodePayload['exp'];
+        $expectedSignature = base64_encode(hash_hmac($this->algorithm, "$headerWithoutBearer.$payload", $this->secretKey, true));
+
+        return hash_equals($signature, $expectedSignature) && time() <= $decodePayload['exp'];
 	}
 
 	public function getDataFromToken($token){

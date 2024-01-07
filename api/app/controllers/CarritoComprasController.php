@@ -21,11 +21,13 @@ class CarritoComprasController {
     public function getCarritosCompras($token){
         if(!$this->validationToken->validateToken($token))
             throw new Error(401, "Unauthorized request");
-
         return json_encode($this->entity->findAll()); 
     }
     
-    public function getCarritoComprasConId($id){
+    public function getCarritoComprasConId($id, $token){
+        if(!$this->validationToken->validateToken($token))
+            throw new Error(401, "Unauthorized request");
+        
         $data = $this->entity->findById($id);
         if (empty($data)) {
             $error = new Error(400, "Carro de compras no se encuentra");
@@ -35,11 +37,15 @@ class CarritoComprasController {
         }
     }
 
-    public function createCarritoCompras($entity){
+    public function createCarritoCompras($entity, $token){
+        if(!$this->validationToken->validateToken($token))
+            throw new Error(401, "Unauthorized request");
         return json_encode($this->entity->save($entity));
     }
 
-    public function updateCarritoCompras($id, $entity){
+    public function updateCarritoCompras($id, $entity, $token){
+        if(!$this->validationToken->validateToken($token))
+            throw new Error(401, "Unauthorized request");
         $data = $this->entity->update($id, $entity);
         if (empty($data)) {
             $error = new Error(400, "Carro de compras no se encuentra");
@@ -49,7 +55,9 @@ class CarritoComprasController {
         }
     }
 
-    public function deleteCarritoCompras($id){
+    public function deleteCarritoCompras($id, $token){
+        if(!$this->validationToken->validateToken($token))
+            throw new Error(401, "Unauthorized request");
         $data = $this->entity->delete($id);
         if (empty($data)) {
             $error = new Error(400, "Carro de compras no se encuentra");
@@ -61,4 +69,3 @@ class CarritoComprasController {
 
 }
 
-?>
