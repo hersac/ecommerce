@@ -36,6 +36,8 @@ class DetallesCCRoute implements RouterInterface
                     echo $this->detallesCCController->getDetallesCC($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->detallesCCController->createDetalleCC($body, $token);
                     exit();
                 default:
@@ -49,6 +51,8 @@ class DetallesCCRoute implements RouterInterface
                     echo $this->detallesCCController->getDetalleCCConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->detallesCCController->updateDetalleCC($id, $body, $token);
                     exit();
                 case 'DELETE':

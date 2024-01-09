@@ -36,6 +36,8 @@ class ClientesRoute implements RouterInterface
                     echo $this->clientController->getClientes($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->clientController->createCliente($body, $token);
                     exit();
                 default:
@@ -49,6 +51,8 @@ class ClientesRoute implements RouterInterface
                     echo $this->clientController->getClienteConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->clientController->updateCliente($id, $body, $token);
                     exit();
                 case 'DELETE':

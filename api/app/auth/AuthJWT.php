@@ -29,6 +29,11 @@ class AuthJWT {
 	}
 
     public function tokenValidate($token){
+
+    	if(empty($token)){
+    		return false;
+    	}
+
 		list($header, $payload, $signature) = explode(".", $token);
 		$headerWithoutBearer = substr($header, 7);
 		//$decodeHeader = json_decode(base64_decode($headerWithoutBearer), true);

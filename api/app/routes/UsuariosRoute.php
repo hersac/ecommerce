@@ -6,14 +6,17 @@ use app\config\Error;
 use app\controllers\UsuariosController;
 use app\interfaces\RouterInterface;
 
-class UsuariosRoute implements RouterInterface {
+class UsuariosRoute implements RouterInterface
+{
     private $userController;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userController = new UsuariosController();
     }
 
-    public function handlerRoutes(){
+    public function handlerRoutes()
+    {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
@@ -30,25 +33,28 @@ class UsuariosRoute implements RouterInterface {
 
         if ($url === "/api/usuarios") {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
                     echo $this->userController->getUsuarios($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->userController->createUsuario($body, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
-
         } elseif ("/$base" === "/usuarios" && is_numeric($id)) {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
                     echo $this->userController->getUsuarioConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->userController->updateUsuario($id, $body, $token);
                     exit();
                 case 'DELETE':
@@ -62,5 +68,4 @@ class UsuariosRoute implements RouterInterface {
             $error = new Error(404, "Not Found");
         }
     }
-
 }

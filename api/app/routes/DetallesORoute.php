@@ -36,6 +36,8 @@ class DetallesORoute implements RouterInterface
                     echo $this->detallesOController->getDetallesO($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->detallesOController->createDetalleO($body, $token);
                     exit();
                 default:
@@ -49,6 +51,8 @@ class DetallesORoute implements RouterInterface
                     echo $this->detallesOController->getDetalleOConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->detallesOController->updateDetalleO($id, $body, $token);
                     exit();
                 case 'DELETE':

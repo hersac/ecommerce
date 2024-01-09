@@ -37,6 +37,8 @@ class RolesRoute implements RouterInterface
                     echo $this->rolesController->getRoles($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->rolesController->createRol($body, $token);
                     exit();
                 default:
@@ -50,6 +52,8 @@ class RolesRoute implements RouterInterface
                     echo $this->rolesController->getRolConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->rolesController->updateRol($id, $body, $token);
                     exit();
                 case 'DELETE':

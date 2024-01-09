@@ -37,6 +37,8 @@ class CarritoComprasRoute implements RouterInterface
                     echo $this->carritoComprasController->getCarritosCompras($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->carritoComprasController->createCarritoCompras($body, $token);
                     exit();
                 default:
@@ -50,6 +52,8 @@ class CarritoComprasRoute implements RouterInterface
                     echo $this->carritoComprasController->getCarritoComprasConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->carritoComprasController->updateCarritoCompras($id, $body, $token);
                     exit();
                 case 'DELETE':

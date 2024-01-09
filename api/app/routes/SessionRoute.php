@@ -7,14 +7,17 @@ use app\config\Error;
 
 use app\interfaces\RouterInterface;
 
-class SessionRoute implements RouterInterface {
+class SessionRoute implements RouterInterface
+{
     private $session;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
-    public function handlerRoutes(){
+    public function handlerRoutes()
+    {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
@@ -29,8 +32,10 @@ class SessionRoute implements RouterInterface {
 
         if ($url === "/api/session") {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->session->loginValidate($body);
                     exit();
                 default:
@@ -41,5 +46,4 @@ class SessionRoute implements RouterInterface {
             $error = new Error(404, "Not Found");
         }
     }
-
 }

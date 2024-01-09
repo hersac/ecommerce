@@ -6,14 +6,17 @@ use app\config\Error;
 use app\controllers\ProductosController;
 use app\interfaces\RouterInterface;
 
-class ProductosRoute implements RouterInterface {
+class ProductosRoute implements RouterInterface
+{
     private $prodController;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->prodController = new ProductosController();
     }
 
-    public function handlerRoutes(){
+    public function handlerRoutes()
+    {
 
         $url = $_SERVER['REQUEST_URI'];
         $method = $_SERVER["REQUEST_METHOD"];
@@ -30,25 +33,28 @@ class ProductosRoute implements RouterInterface {
 
         if ($url === "/api/productos") {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
                     echo $this->prodController->getProductos($token);
                     exit();
                 case 'POST':
+                    if (empty($body))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->prodController->createProducto($body, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
-
         } elseif ("/$base" === "/productos" && is_numeric($id)) {
             header('Content-Type: application/json');
-            switch($method){
+            switch ($method) {
                 case 'GET':
                     echo $this->prodController->getProductoConId($id, $token);
                     exit();
                 case 'PUT':
+                    if (empty($body) || empty($id))
+                        $error = new Error(400, "Unrecognized error");
                     echo $this->prodController->updateProducto($id, $body, $token);
                     exit();
                 case 'DELETE':
