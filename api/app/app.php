@@ -1,5 +1,6 @@
 <?php
 
+use app\config\Cors;
 use app\config\Error;
 use app\config\Router;
 use app\routes\ProductosRoute;
@@ -17,6 +18,9 @@ $router = new Router();
 $pattern = "#/(\w+)/(\w+)#";
 preg_match($pattern, $url, $matches);
 $urlToValidate = isset($matches[2]) ? $matches[2] : null;
+
+$cors = new Cors();
+$cors->success();
 
 switch ($urlToValidate) {
 	case 'productos':
