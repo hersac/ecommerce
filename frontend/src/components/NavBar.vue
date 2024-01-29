@@ -14,14 +14,15 @@
     </div>
 
     <div class="flex justify-end items-center space-x-4 p-2 w-100">
-      <BtnComponent :class="'bg-green-500 hover:bg-green-300 active:bg-green-500 text-white font-bold py-2 px-4 rounded'" :text="'Login'" />
-      <BtnComponent :class="'bg-green-500 hover:bg-green-300 active:bg-green-500 text-white font-bold py-2 px-4 rounded'" :text="'Registrar'" />
+      <BtnComponent :class="'bg-green-500 hover:bg-green-300 active:bg-green-500 text-white font-bold py-2 px-4 rounded'" :text="'Login'" @get-click="redirectLogin"/>
+      <BtnComponent :class="'bg-green-500 hover:bg-green-300 active:bg-green-500 text-white font-bold py-2 px-4 rounded'" :text="'Registrar'" @get-click="redirectRegister" />
     </div>
 
   </nav>
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import router from '@/router';
 import BtnComponent from '@/components/BtnComponent.vue';
 import { Menu } from '@/models/Menu';
 import { titulos } from '@/service/titlesService';
@@ -29,5 +30,13 @@ import { titulos } from '@/service/titlesService';
 const titulosMenu = ref<Array<Menu>>([]);
 
 titulosMenu.value = titulos;
+
+const redirectLogin = ()=>{
+  router.push('/login');
+};
+
+const redirectRegister = ()=>{
+  router.push('/register');
+};
 
 </script>

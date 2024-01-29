@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="h-screen">
     <h2>¡Bienvenido!</h2>
     <span>Ingresa a tu cuenta</span>
     <div
       class="flex justify-center items-center mx-auto p-2 rounded-md shadow-xl"
     >
-      <form class="w-1/2">
+      <form>
         <div>
           <div class="relative mt-2 rounded-md shadow-sm">
             <input

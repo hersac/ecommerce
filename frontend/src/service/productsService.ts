@@ -27,7 +27,7 @@ export const createProduct = (body: Object)=>{
         return response.data;
     }).catch(error=>{
         console.log(error);
-    });;
+    });
 }
 
 export const updateProduct = (id: number, body: Object)=>{
@@ -35,7 +35,7 @@ export const updateProduct = (id: number, body: Object)=>{
         return response.data;
     }).catch(error=>{
         console.log(error);
-    });;
+    });
 }
 
 export const deleteProductById = (id: number)=>{
@@ -43,5 +43,5 @@ export const deleteProductById = (id: number)=>{
         return response.data;
     }).catch(error=>{
         console.log(error);
-    });;
+    });
 }
