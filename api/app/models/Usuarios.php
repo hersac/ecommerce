@@ -11,5 +11,6 @@ class Usuarios{
 	private string $primerApellido;
 	private string $segundoApellido;
 	private string $documentoId;
+	private string $fechaNacimiento;
 	private string $direccion;
 }
