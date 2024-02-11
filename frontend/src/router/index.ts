@@ -1,25 +1,30 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { authGuard, basicGuard } from '../security/auth/Auth.guard';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/views/HomeView.vue'),
+    beforeEnter: authGuard,
   },
   {
     path: '/productos',
     name: 'productos',
-    component: () => import('@/views/Products.vue')
+    component: () => import('@/views/Products.vue'),
+    beforeEnter: authGuard,
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/security/login/LoginView.vue')
+    component: () => import('@/security/login/LoginView.vue'),
+    beforeEnter: basicGuard,
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/security/register/RegisterView.vue')
+    component: () => import('@/security/register/RegisterView.vue'),
+    beforeEnter: basicGuard,
   },
 ]
 

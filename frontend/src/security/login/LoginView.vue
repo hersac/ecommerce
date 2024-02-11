@@ -9,17 +9,16 @@
           alt="Avatar" class="w-20 rounded-full h-20 object-cover" />
       </div>
       <div class="flex justify-center mx-auto p-2 ">
-        <form class="w-[80%] p-8">
+        <Form class="w-[80%] p-8" @submit="onsubmit">
           <div>
             <div class="relative mt-2 rounded-md shadow-sm">
-              <input type="email" name="email" id="email"
-                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 h-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Correo" />
+              <Field type="email" name="username" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 h-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                placeholder="Correo" :rules="validEmail" />
+              <ErrorMessage name="username" class="errorMessage" />
             </div>
 
             <div class="relative mt-2 rounded-md shadow-sm">
-              <input type="password" name="password" id="password"
-                class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 h-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              <Field type="password" name="password" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 h-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder="Contraseña" />
             </div>
           </div>
@@ -28,12 +27,15 @@
               <p class="text-sm underline underline-offset-4 hover:text-green-500">Recuperar contraseña</p>
             </router-link>
           </div>
-          <div class="flex justify-center items-center p-5">
+          <div class="flex justify-center items-center p-5" v-if="!loading">
             <BtnComponent
               :class="'bg-green-500 hover:bg-green-300 active:bg-green-500 text-white font-bold py-2 px-4 rounded'"
               :text="'Entrar'" />
           </div>
-        </form>
+          <div class="flex justify-center items-center" >
+            <Loading :isActive="loading" :class="'w-8 h-8 mt-5'" />
+          </div>
+        </Form>
       </div>
       <div class="flex justify-center items-center">
         <router-link to="/register">
@@ -45,7 +47,30 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
+import { Field, Form, ErrorMessage } from 'vee-validate';
 import AuthBasic from '@/layouts/AuthBasic.vue';
 import BtnComponent from "@/components/BtnComponent.vue";
+import Loading from '@/components/Loading.vue';
+import { validEmail } from '../../utils/ErrorValid';
+import { login } from  '../../service/authServices/AuthService';
+import router from '@/router';
+
+const formData = ref<Object>({});
+const loading = ref<boolean>(false);
+
+const onsubmit = async (values: any) => {
+  loading.value = true;
+  formData.value = values;
+  try {
+    await login(formData.value);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    loading.value = false;
+    router.push('/');
+  }
+};
+
 </script>
 

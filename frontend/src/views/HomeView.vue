@@ -5,6 +5,9 @@
     </div>
 
     <div class="flex flex-wrap gap-4 p-3">
+      <button @click="logout">cerrar sesion</button>
+
+<!--
       <div
         class="grid grid-rows-[20px, 140px, 20px, 20px, 20px, 20px] gap-2 w-60 h-80 p-2 rounded-md shadow-xl"
         v-for="(product, index) in productsData" :key="index"
@@ -31,12 +34,14 @@
           />
         </div>
       </div>
+      -->
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import BtnComponent from "@/components/BtnComponent.vue";
+import router from "@/router";
 import { getProducts } from '@/service/productsService';
 import { onMounted, ref } from "vue";
 
@@ -50,5 +55,10 @@ onMounted(() => {
 const productsCall = async () => {
   productsData.value = await getProducts();
 }
+
+const logout = () => {
+  localStorage.removeItem('TOKEN_CONSULTAS');
+  router.push('/login');
+};
 
 </script>

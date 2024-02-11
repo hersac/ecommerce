@@ -8,11 +8,13 @@ export default createStore({
   },
   mutations: {
     setToken(state, token){
-       state.token = token;
+      state.token = token;
     }
   },
   actions: {
-
+    setTokenAction({ commit }, token){
+      commit('setToken', token);
+    }
   },
   modules: {
   }
