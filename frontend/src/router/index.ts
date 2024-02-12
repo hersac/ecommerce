@@ -15,6 +15,12 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: authGuard,
   },
   {
+    path: '/cuenta',
+    name: 'Cuenta',
+    component: () => import('@/views/cuenta/CuentaView.vue'),
+    beforeEnter: authGuard,
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/security/login/LoginView.vue'),

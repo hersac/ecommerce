@@ -79,7 +79,7 @@ import { Field, Form, ErrorMessage } from 'vee-validate';
 import AuthBasic from '@/layouts/AuthBasic.vue';
 import BtnComponent from '@/components/BtnComponent.vue';
 import Loading from '@/components/Loading.vue';
-import { register } from  '../../service/authServices/AuthService';
+import { createUsuario } from '@/service/usuarios.service';
 import { validRequired, validEmail, validCedula, validDireccion, validDate, validPassword, validConfirmPassword } from '../../utils/ErrorValid';
 import router from '@/router';
 
@@ -88,10 +88,11 @@ let loading = ref<boolean>(false);
 
 const onSubmit = async (values: any) => {
     loading.value = true;
-    const { confirmPassword, ...data } = values;
-    formData.value = data;
+    const { confirmPassword, username, ...data } = values;
+    const emailLowwercased = username.toLowerCase();
+    formData.value = { ...data, username: emailLowwercased };
     try{
-        await register(formData.value);
+        await createUsuario(formData.value);
     } catch(e) {
         console.error(e);
     } finally {
@@ -102,3 +103,4 @@ const onSubmit = async (values: any) => {
 };
 </script>
 
+../../service/authServices/Auth.service

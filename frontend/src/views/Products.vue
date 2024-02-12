@@ -34,7 +34,7 @@
 </template>
 <script lang="ts" setup>
 import BtnComponent from "@/components/BtnComponent.vue";
-import { getProducts } from '@/service/productsService';
+import { getProducts } from '@/service/products.service';
 import { onMounted, ref } from "vue";
 
 
@@ -48,3 +48,4 @@ const productsCall = async () => {
   productsData.value = await getProducts();
 }
 </script>
+@/service/products.service

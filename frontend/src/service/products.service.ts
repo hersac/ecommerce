@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const token = "eyJhbGciOiJzaGEyNTYiLCJ0eXAiOiJKV1QifQ==.eyJkYXRhIjpbeyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImhlcnNhYzFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxMjM0NTYiLCJwcmltZXJfbm9tYnJlIjoiSGVyaWJlcnRvIiwic2VndW5kb19ub21icmUiOiIgIiwicHJpbWVyX2FwZWxsaWRvIjoiU2FuY2hleiIsInNlZ3VuZG9fYXBlbGxpZG8iOiJDYXN0cm8iLCJkb2N1bWVudG9faWQiOiIxMDc1MjkyNDI4IiwiZGlyZWNjaW9uIjoiY2FycmVyYSAxIGEgYmlzIDY0IDA5In1dLCJleHAiOjE3MDU5NDc0OTl9.ynrbfqyvyFfn+xeD5C\/irTg+CiyI52UMaRToo9BUP\/Q=";
+const token: string | any = localStorage.getItem('TOKEN_CONSULTAS');
 
 const headers ={
     'Authorization': `Bearer ${token}`

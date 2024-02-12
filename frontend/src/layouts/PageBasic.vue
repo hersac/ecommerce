@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="w-full">
         <div>
             <NavBar />
         </div>
-        <div>
+        <div class="mx-20">
+            <h2 class="uppercase text-3xl mt-5"><slot name="title"/></h2>
+            
             <slot />
         </div>
     </div>

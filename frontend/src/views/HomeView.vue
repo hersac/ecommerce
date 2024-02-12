@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div>
-      <h2 class="text-2xl uppercase">Home</h2>
-    </div>
-
-    <div class="flex flex-wrap gap-4 p-3">
-      <button @click="logout">cerrar sesion</button>
+    <div class="flex flex-wrap gap-4">
+      <PageBasic>
+        <template #title>
+          <h2>Home</h2>
+        </template>
+      </PageBasic>
 
 <!--
       <div
@@ -40,14 +40,14 @@
 </template>
 
 <script lang="ts" setup>
+import PageBasic from "@/layouts/PageBasic.vue";
 import BtnComponent from "@/components/BtnComponent.vue";
 import router from "@/router";
-import { getProducts } from '@/service/productsService';
+import { getProducts } from '../service/products.service';
 import { onMounted, ref } from "vue";
 
-
 const productsData = ref<Object[]>([]);
-
+/*
 onMounted(() => {
     productsCall();
 });
@@ -55,10 +55,11 @@ onMounted(() => {
 const productsCall = async () => {
   productsData.value = await getProducts();
 }
-
+*/
 const logout = () => {
   localStorage.removeItem('TOKEN_CONSULTAS');
   router.push('/login');
 };
 
 </script>
+@/service/products.service

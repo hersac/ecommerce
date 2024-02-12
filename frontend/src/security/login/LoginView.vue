@@ -48,29 +48,37 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import router from '@/router';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import AuthBasic from '@/layouts/AuthBasic.vue';
 import BtnComponent from "@/components/BtnComponent.vue";
 import Loading from '@/components/Loading.vue';
 import { validEmail } from '../../utils/ErrorValid';
-import { login } from  '../../service/authServices/AuthService';
-import router from '@/router';
+import { login } from '../../service/authServices/auth.service';
+import { getUsuarioPorEmail } from '../../service/usuarios.service';
+import { Usuario } from '../../models/Usuario.interface';
 
 const formData = ref<Object>({});
+const userData = ref<Usuario[]>([]);
 const loading = ref<boolean>(false);
 
 const onsubmit = async (values: any) => {
   loading.value = true;
-  formData.value = values;
+  const { username, ...data } = values;
+  const emailLowercased = username.toLowerCase();
+  formData.value = {username: emailLowercased, ...data };
   try {
     await login(formData.value);
+    userData.value = await getUsuarioPorEmail(emailLowercased);
+    localStorage.setItem('userLogin', JSON.stringify(userData.value[0]));
+    router.push('/');
   } catch (error) {
     console.error(error);
   } finally {
     loading.value = false;
-    router.push('/');
   }
 };
 
 </script>
 
+../../service/authServices/Auth.service

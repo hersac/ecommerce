@@ -22,10 +22,10 @@ class UsuariosRoute implements RouterInterface
         $method = $_SERVER["REQUEST_METHOD"];
         $headers = getallheaders();
         $token = isset($headers['Authorization']) ? $headers['Authorization'] : null;
-        $pattern = "#/(\w+)/(\w+)/(\d+)#";
+        $pattern = "#/(\w+)/(\w+)/([^/]+)#";
         preg_match($pattern, $url, $matches);
 
-        $id = isset($matches[3]) ? $matches[3] : null;
+        $param = isset($matches[3]) ? $matches[3] : null;
         $base = isset($matches[3]) ? $matches[2] : null;
 
         $postData = file_get_contents("php://input");
@@ -46,19 +46,29 @@ class UsuariosRoute implements RouterInterface
                     $error = new Error(405, "Method Not Allowed");
                     break;
             }
-        } elseif ("/$base" === "/usuarios" && is_numeric($id)) {
+        } elseif ("/$base" === "/usuarios" && is_numeric($param)) {
             header('Content-Type: application/json');
             switch ($method) {
                 case 'GET':
-                    echo $this->userController->getUsuarioConId($id, $token);
+                    echo $this->userController->getUsuarioConId($param, $token);
                     exit();
                 case 'PUT':
                     if (empty($body) || empty($id))
                         $error = new Error(400, "Unrecognized error");
-                    echo $this->userController->updateUsuario($id, $body, $token);
+                    echo $this->userController->updateUsuario($param, $body, $token);
                     exit();
                 case 'DELETE':
-                    echo $this->userController->deleteUsuario($id, $token);
+                    echo $this->userController->deleteUsuario($param, $token);
+                    exit();
+                default:
+                    $error = new Error(405, "Method Not Allowed");
+                    break;
+            }
+        } elseif ("/$base" === "/usuarios" && is_string($param)) {
+            header('Content-Type: application/json');
+            switch ($method) {
+                case 'GET':
+                    echo $this->userController->getUsuarioConCorreo($param, $token);
                     exit();
                 default:
                     $error = new Error(405, "Method Not Allowed");
