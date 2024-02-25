@@ -10,7 +10,7 @@ class DBConfig {
 
 	private $db = [
 		'host' => 'localhost',
-		'port' => '5432',
+		'port' => '3306',
 		'dbname' => 'ecommerce',
 		'username' => 'heri',
 		'password' => 'Heriberto1995**'
@@ -18,13 +18,15 @@ class DBConfig {
 
 	public function __construct() {
 		try {
-			$this->conn = new PDO("pgsql:
+			$this->conn = new PDO("mysql:
 				host={$this->db['host']},
 				port={$this->db['port']},
 				dbname={$this->db['dbname']}",
 				$this->db['username'],
 				$this->db['password']);
 			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			$this->conn->exec("USE {$this->db['dbname']}");
 		} catch (PDOException $e) {
 			die('Database not connected: ' . $e->getMessage());
 		}

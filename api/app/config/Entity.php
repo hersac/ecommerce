@@ -18,7 +18,7 @@ class Entity {
 	public function __construct($class) {
 		try {
 
-			$this->className = basename(str_replace("\\", "/", $class));
+			$this->className =  strtolower(basename(str_replace("\\", "/", $class)));
 
 			$reflection = new ReflectionClass($class);
 			$properties = $reflection->getProperties(ReflectionProperty::IS_PRIVATE);
