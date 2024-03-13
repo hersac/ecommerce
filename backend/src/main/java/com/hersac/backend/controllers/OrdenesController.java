@@ -13,38 +13,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.models.Roles;
-import com.hersac.backend.services.RolesService;
+import com.hersac.backend.models.Ordenes;
+import com.hersac.backend.services.OrdenesService;
 
 @RestController
-@RequestMapping("/api/roles")
-public class RolesController {
+@RequestMapping("/api/ordenes")
+public class OrdenesController {
 
     @Autowired
-    private RolesService rolesServ;
+    private OrdenesService servicioOrdenes;
 
     @GetMapping
-    public Optional<List<Roles>> getRoles(){
-        return rolesServ.getRoles();
+    public Optional<List<Ordenes>> getOrdenes(){
+        return servicioOrdenes.getOrdenes();
     }
 
     @GetMapping("/{id}")
-    public Optional<Roles> getRoleById(@PathVariable Long id){
-        return rolesServ.getRolById(id);
+    public Optional<Ordenes> getOrdenById(@PathVariable Long id){
+        return servicioOrdenes.getOrdenById(id);
     }
 
     @PostMapping
-    public Optional<String> addRoles(@RequestBody Roles newRole ){
-        return rolesServ.addRol(newRole);
+    public Optional<String> addOrden(@RequestBody Ordenes newOrden ){
+        return servicioOrdenes.addOrden(newOrden);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateRole(@PathVariable Long id, @RequestBody Roles newData){
-        return rolesServ.updateRol(id, newData);
+    public Optional<String> updateOrden(@PathVariable Long id, @RequestBody Ordenes newData){
+        return servicioOrdenes.updateOrden(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteRole(@PathVariable Long id){
-        return rolesServ.deleteRolById(id);
+    public Optional<String> deleteOrden(@PathVariable Long id){
+        return servicioOrdenes.deleteOrdenById(id);
     }
 }

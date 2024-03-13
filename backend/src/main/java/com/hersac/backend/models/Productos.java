@@ -6,17 +6,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Productos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long prodId;
+
     private String nombre;
     private String descCorta;
     private String descripcion;

@@ -18,6 +18,6 @@ public class DetallesOrdenes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detallesOCId;
     private Long ordenId;
-    // private Productos prodId;
+    private Long prodId;
     private Integer cantidad;
 }

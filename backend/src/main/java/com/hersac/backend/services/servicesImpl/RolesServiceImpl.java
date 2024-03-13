@@ -50,8 +50,8 @@ public class RolesServiceImpl implements RolesService{
     public Optional<String> deleteRolById(Long id){
         Optional<Roles> usuario = rolesRepo.findById(id);
         if(!usuario.isPresent())
-            throw new ItemNotFoundException("Usuario no encontrado");
+            throw new ItemNotFoundException("Rol no encontrado");
         rolesRepo.deleteById(id);
-        return Optional.of("Usuario eliminado correctamente");
+        return Optional.of("Rol eliminado correctamente");
     }
 }

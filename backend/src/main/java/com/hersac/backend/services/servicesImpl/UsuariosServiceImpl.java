@@ -47,8 +47,8 @@ public class UsuariosServiceImpl implements UsuariosService {
         usuarioAnterior.get().setPrimerApellido(usuario.getPrimerApellido());
         usuarioAnterior.get().setSegundoApellido(usuario.getSegundoApellido());
         usuarioAnterior.get().setIdentificacion(usuario.getIdentificacion());
-        usuarioAnterior.get().setDireccion(usuario.getDireccion());
         usuarioAnterior.get().setCumpleaños(usuario.getCumpleaños());
+        usuarioAnterior.get().setDireccion(usuario.getDireccion());
 
         usuarioRepo.save(usuarioAnterior.get());
         return Optional.of("Usuario actualizado correctamente");
