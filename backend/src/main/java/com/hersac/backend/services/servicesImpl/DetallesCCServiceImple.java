@@ -42,7 +42,7 @@ public class DetallesCCServiceImple implements DetallesCCService {
             throw new ItemNotFoundException("Detalles de carrito de compras no encontrados");
 
         detallesCCAnterior.get().setIdentificacion(detallesCC.getIdentificacion());
-        detallesCCAnterior.get().setProducto(detallesCC.getProducto());
+        detallesCCAnterior.get().setProdId(detallesCC.getProdId());
         detallesCCAnterior.get().setCantidad(detallesCC.getCantidad());
         detallesCCAnterior.get().setPrecioUnitario(detallesCC.getPrecioUnitario());
         detallesCCAnterior.get().setSubtotal(detallesCC.getSubtotal());

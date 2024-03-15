@@ -40,8 +40,8 @@ public class DetallesOrdenesServiceImpl implements DetallesOrdenesService {
         Optional<DetallesOrdenes> detallesOrdenesAnterior = detallesOrdenesRepo.findById(id);
         if (!detallesOrdenesAnterior.isPresent())
             throw new ItemNotFoundException("Detalles de orden no encontrados");
-        detallesOrdenesAnterior.get().setOrden(detallesOrdenes.getOrden());
-        detallesOrdenesAnterior.get().setProducto(detallesOrdenes.getProducto());
+        detallesOrdenesAnterior.get().setOrdenId(detallesOrdenes.getOrdenId());
+        detallesOrdenesAnterior.get().setProdId(detallesOrdenes.getProdId();
         detallesOrdenesAnterior.get().setCantidad(detallesOrdenes.getCantidad());
         detallesOrdenesRepo.save(detallesOrdenesAnterior.get());
         return Optional.of("Detalles de orden actualizados correctamente");

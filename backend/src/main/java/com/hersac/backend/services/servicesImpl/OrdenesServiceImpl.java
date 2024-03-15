@@ -42,10 +42,10 @@ public class OrdenesServiceImpl implements OrdenesService {
         if (!ordenAnterior.isPresent())
             throw new ItemNotFoundException("Orden no encontrada");
         ordenAnterior.get().setFechaOrden(orden.getFechaOrden());
-        ordenAnterior.get().setUsuario(orden.getUsuario());
-        ordenAnterior.get().setRol(orden.getRol());
-        ordenAnterior.get().setEstado(orden.getEstado());
-        ordenAnterior.get().setDescripcion(orden.getDescripcion());
+        ordenAnterior.get().setUserId(orden.getUserId());
+        ordenAnterior.get().setFechaOrden(orden.getFechaOrden());
+        ordenAnterior.get().setDireccionEnvio(orden.getDireccionEnvio());
+        ordenAnterior.get().setEstadoOrden(orden.getEstadoOrden());
 
         ordenRepo.save(ordenAnterior.get());
         return Optional.of("Orden actualizada correctamente");
