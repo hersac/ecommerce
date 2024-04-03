@@ -1,6 +1,7 @@
 package com.hersac.backend.utils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,10 @@ public class Autoruns implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        Date fechaHoy = new Date();
         List<Usuarios> defaultUsuarios = Arrays.asList(
-                new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", "", null, "")
-                );
+            new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, "")
+        );
         usuariosRepo.saveAll(defaultUsuarios);
     }
 }
