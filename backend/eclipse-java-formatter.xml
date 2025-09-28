@@ -21,5 +21,8 @@
     <!-- Ajustes de espacio -->
     <setting id="org.eclipse.jdt.core.formatter.insert_space_before_semicolon" value="do not insert"/>
     <setting id="org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments" value="insert"/>
+
+    <setting id="org.eclipse.jdt.core.formatter.number_of_blank_lines_preserved" value="2"/>
+
   </profile>
 </profiles>
