@@ -22,35 +22,40 @@ public class CarritoComprasServiceImpl implements CarritoComprasService {
 
     @Override
     public Optional<CarritoCompras> getCarritoComprasById(Long id) {
-        Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-        if(!carritoCompras.isPresent())
+        Optional<CarritoCompras> carritoCompras = carritoComprasRepo
+                .findById(id);
+        if (!carritoCompras.isPresent())
             throw new RuntimeException("Carrito de compras no encontrado");
         return carritoCompras;
     }
 
     @Override
-    public Optional<String> addCarritoCompras(CarritoCompras newCarritoCompras) {
+    public Optional<String> addCarritoCompras(
+            CarritoCompras newCarritoCompras) {
         carritoComprasRepo.save(newCarritoCompras);
         return Optional.of("Carrito de compras agregado");
     }
 
     @Override
-    public Optional<String> updateCarritoCompras(Long id, CarritoCompras newData) {
-        Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-        if(!carritoCompras.isPresent())
+    public Optional<String> updateCarritoCompras(
+            Long id, CarritoCompras newData) {
+        Optional<CarritoCompras> carritoCompras = carritoComprasRepo
+                .findById(id);
+        if (!carritoCompras.isPresent())
             throw new RuntimeException("Carrito de compras no encontrado");
-        carritoCompras.setUserId(newData.getUserId());
-        carritoCompras.setIdentificacion(newData.getIdentificacion());
-        carritoCompras.setFecha(newData.getFecha());
-        carritoCompras.setEstadoCarrito(newData.getEstadoCarrito());
-        carritoComprasRepo.save(newData);
+        carritoCompras.get().setUserId(newData.getUserId());
+        carritoCompras.get().setIdentificacion(newData.getIdentificacion());
+        carritoCompras.get().setFecha(newData.getFecha());
+        carritoCompras.get().setEstadoCarrito(newData.getEstadoCarrito());
+        carritoComprasRepo.save(carritoCompras.get());
         return Optional.of("Carrito de compras actualizado");
     }
 
     @Override
     public Optional<String> deleteCarritoComprasById(Long id) {
-        Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-        if(!carritoCompras.isPresent())
+        Optional<CarritoCompras> carritoCompras = carritoComprasRepo
+                .findById(id);
+        if (!carritoCompras.isPresent())
             throw new RuntimeException("Carrito de compras no encontrado");
         carritoComprasRepo.deleteById(id);
         return Optional.of("Carrito de compras eliminado");

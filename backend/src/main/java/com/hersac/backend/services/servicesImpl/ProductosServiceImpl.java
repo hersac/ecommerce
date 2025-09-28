@@ -41,7 +41,7 @@ public class ProductosServiceImpl implements ProductosService {
         if(!producto.isPresent())
             throw new RuntimeException("Producto no encontrado");
         producto.get().setNombre(newData.getNombre());
-        producto.get().setDesCorta(newData.getDesCorta());
+        producto.get().setDescCorta(newData.getDescCorta());
         producto.get().setDescripcion(newData.getDescripcion());
         producto.get().setPrecio(newData.getPrecio());
         producto.get().setReferencia(newData.getReferencia());

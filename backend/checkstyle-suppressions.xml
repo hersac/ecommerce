@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+  "-//Checkstyle//DTD SuppressionFilter Configuration 1.0//EN"
+  "https://checkstyle.org/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+  <!-- ejemplo: excluir todo lo que esté en folder /target/generated-sources/ -->
+  <suppress files=".*[\\/]target[\\/]generated.*" checks=".*"/>
+  <!-- ejemplo: excluir clases concretas -->
+  <suppress files=".*MyGeneratedClass\.java" checks=".*"/>
+</suppressions>

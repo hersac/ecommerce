@@ -39,13 +39,13 @@ public class ClientesServiceImpl implements ClientesService{
         Optional<Clientes> cliente = clientesRepo.findById(id);
         if(!cliente.isPresent())
             throw new RuntimeException("Cliente no encontrado");
-        cliente.setPrimerNombre(newData.getPrimerNombre());
-        cliente.setSegundoNombre(newData.getSegundoNombre());
-        cliente.setPrimerApellido(newData.getPrimerApellido());
-        cliente.setSegundoApellido(newData.getSegundoApellido());
-        cliente.setTipoDocumento(newData.getTipoDocumento());
-        cliente.setIdentificacion(newData.getIdentificacion());
-        clientesRepo.save(newData);
+        cliente.get().setPrimerNombre(newData.getPrimerNombre());
+        cliente.get().setSegundoNombre(newData.getSegundoNombre());
+        cliente.get().setPrimerApellido(newData.getPrimerApellido());
+        cliente.get().setSegundoApellido(newData.getSegundoApellido());
+        cliente.get().setTipoDocumento(newData.getTipoDocumento());
+        cliente.get().setIdentificacion(newData.getIdentificacion());
+        clientesRepo.save(cliente.get());
         return Optional.of("Cliente actualizado");
     }
 

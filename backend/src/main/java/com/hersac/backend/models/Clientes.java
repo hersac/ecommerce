@@ -17,10 +17,10 @@ public class Clientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clienteId;
-    private String primernombre;
+    private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
-    private String SegundoApellido;
+    private String segundoApellido;
     private String tipoDocumento;
     private String identificacion;
 }
