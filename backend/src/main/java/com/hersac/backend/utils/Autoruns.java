@@ -22,9 +22,8 @@ public class Autoruns implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
         Date fechaHoy = new Date();
-        List<Usuarios> defaultUsuarios = Arrays.asList(
-            new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, "")
-        );
+        List<Usuarios> defaultUsuarios = Arrays.asList(new Usuarios(null,
+                "admin", "admin", "Admin", "", "", "", "", fechaHoy, ""));
         usuariosRepo.saveAll(defaultUsuarios);
     }
 }

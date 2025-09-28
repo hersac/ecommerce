@@ -23,27 +23,28 @@ public class ClientesController {
     private ClientesService clientesService;
 
     @GetMapping
-    public Optional<List<Clientes>> getClientes(){
+    public Optional<List<Clientes>> getClientes() {
         return clientesService.getClientes();
     }
 
     @GetMapping("/{id}")
-    public Optional<Clientes> getClientesById(@PathVariable Long id){
+    public Optional<Clientes> getClientesById(@PathVariable Long id) {
         return clientesService.getClientesById(id);
     }
 
     @PostMapping
-    public Optional<String> addClientes(@RequestBody Clientes newClientes){
+    public Optional<String> addClientes(@RequestBody Clientes newClientes) {
         return clientesService.addClientes(newClientes);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateClientes(@PathVariable Long id, @RequestBody Clientes newData){
+    public Optional<String> updateClientes(@PathVariable Long id,
+            @RequestBody Clientes newData) {
         return clientesService.updateClientes(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteClientes(@PathVariable Long id){
+    public Optional<String> deleteClientes(@PathVariable Long id) {
         return clientesService.deleteClientesById(id);
     }
 }

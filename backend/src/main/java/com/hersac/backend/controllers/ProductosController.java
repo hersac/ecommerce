@@ -24,27 +24,28 @@ public class ProductosController {
     private ProductosService productosServ;
 
     @GetMapping
-    public Optional<List<Productos>> getProductos(){
+    public Optional<List<Productos>> getProductos() {
         return productosServ.getProductos();
     }
 
     @GetMapping("/{id}")
-    public Optional<Productos> getProductoById(@PathVariable Long id){
+    public Optional<Productos> getProductoById(@PathVariable Long id) {
         return productosServ.getProductoById(id);
     }
 
     @PostMapping
-    public Optional<String> addProductos(@RequestBody Productos newProducto ){
+    public Optional<String> addProductos(@RequestBody Productos newProducto) {
         return productosServ.addProducto(newProducto);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateProducto(@PathVariable Long id, @RequestBody Productos newData){
+    public Optional<String> updateProducto(@PathVariable Long id,
+            @RequestBody Productos newData) {
         return productosServ.updateProducto(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteProducto(@PathVariable Long id){
+    public Optional<String> deleteProducto(@PathVariable Long id) {
         return productosServ.deleteProductoById(id);
     }
 }

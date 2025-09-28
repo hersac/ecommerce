@@ -24,27 +24,30 @@ public class CarritoComprasController {
     private CarritoComprasService carritoComprasService;
 
     @GetMapping
-    public Optional<List<CarritoCompras>> getCarritoCompras(){
+    public Optional<List<CarritoCompras>> getCarritoCompras() {
         return carritoComprasService.getCarritoCompras();
     }
 
     @GetMapping("/{id}")
-    public Optional<CarritoCompras> getCarritoComprasById(@PathVariable Long id){
+    public Optional<CarritoCompras> getCarritoComprasById(
+            @PathVariable Long id) {
         return carritoComprasService.getCarritoComprasById(id);
     }
 
     @PostMapping
-    public Optional<String> addCarritoCompras(@RequestBody CarritoCompras newCarritoCompras){
+    public Optional<String> addCarritoCompras(
+            @RequestBody CarritoCompras newCarritoCompras) {
         return carritoComprasService.addCarritoCompras(newCarritoCompras);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateCarritoCompras(@PathVariable Long id, @RequestBody CarritoCompras newData){
+    public Optional<String> updateCarritoCompras(@PathVariable Long id,
+            @RequestBody CarritoCompras newData) {
         return carritoComprasService.updateCarritoCompras(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteCarritoCompras(@PathVariable Long id){
+    public Optional<String> deleteCarritoCompras(@PathVariable Long id) {
         return carritoComprasService.deleteCarritoComprasById(id);
     }
 }

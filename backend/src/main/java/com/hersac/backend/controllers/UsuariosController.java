@@ -24,27 +24,28 @@ public class UsuariosController {
     private UsuariosService usuariosServ;
 
     @GetMapping
-    public Optional<List<Usuarios>> getUsuarios(){
+    public Optional<List<Usuarios>> getUsuarios() {
         return usuariosServ.getUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuarios> getUsuarioById(@PathVariable Long id){
+    public Optional<Usuarios> getUsuarioById(@PathVariable Long id) {
         return usuariosServ.getUsuarioById(id);
     }
 
     @PostMapping
-    public Optional<String> addUsuarios(@RequestBody Usuarios newUser ){
+    public Optional<String> addUsuarios(@RequestBody Usuarios newUser) {
         return usuariosServ.addUsuario(newUser);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateUsuario(@PathVariable Long id, @RequestBody Usuarios newData){
+    public Optional<String> updateUsuario(@PathVariable Long id,
+            @RequestBody Usuarios newData) {
         return usuariosServ.updateUsuario(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteUsuario(@PathVariable Long id){
+    public Optional<String> deleteUsuario(@PathVariable Long id) {
         return usuariosServ.deleteUsuarioById(id);
     }
 }

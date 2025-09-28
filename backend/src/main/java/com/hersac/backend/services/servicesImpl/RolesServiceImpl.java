@@ -12,33 +12,33 @@ import com.hersac.backend.repositories.RolesRepository;
 import com.hersac.backend.services.RolesService;
 
 @Service
-public class RolesServiceImpl implements RolesService{
+public class RolesServiceImpl implements RolesService {
     @Autowired
     private RolesRepository rolesRepo;
 
     @Override
-    public Optional<List<Roles>> getRoles(){
+    public Optional<List<Roles>> getRoles() {
         return Optional.of(rolesRepo.findAll());
     }
 
     @Override
-    public Optional<Roles> getRolById(Long id){
+    public Optional<Roles> getRolById(Long id) {
         Optional<Roles> rol = rolesRepo.findById(id);
-        if(!rol.isPresent())
+        if (!rol.isPresent())
             throw new ItemNotFoundException("Rol no encontrado");
         return rol;
     }
 
     @Override
-    public Optional<String> addRol(Roles rol){
+    public Optional<String> addRol(Roles rol) {
         rolesRepo.save(rol);
         return Optional.of("Rol creado correctamente");
     }
 
     @Override
-    public Optional<String> updateRol(Long id, Roles rol){
+    public Optional<String> updateRol(Long id, Roles rol) {
         Optional<Roles> rolAnterior = rolesRepo.findById(id);
-        if(!rolAnterior.isPresent())
+        if (!rolAnterior.isPresent())
             throw new ItemNotFoundException("Rol no encontrado");
         rolAnterior.get().setNombreRol(rol.getNombreRol());
 
@@ -47,9 +47,9 @@ public class RolesServiceImpl implements RolesService{
     }
 
     @Override
-    public Optional<String> deleteRolById(Long id){
+    public Optional<String> deleteRolById(Long id) {
         Optional<Roles> usuario = rolesRepo.findById(id);
-        if(!usuario.isPresent())
+        if (!usuario.isPresent())
             throw new ItemNotFoundException("Rol no encontrado");
         rolesRepo.deleteById(id);
         return Optional.of("Rol eliminado correctamente");

@@ -11,7 +11,7 @@ import com.hersac.backend.repositories.ClientesRepository;
 import com.hersac.backend.services.ClientesService;
 
 @Service
-public class ClientesServiceImpl implements ClientesService{
+public class ClientesServiceImpl implements ClientesService {
     @Autowired
     private ClientesRepository clientesRepo;
 
@@ -23,7 +23,7 @@ public class ClientesServiceImpl implements ClientesService{
     @Override
     public Optional<Clientes> getClientesById(Long id) {
         Optional<Clientes> cliente = clientesRepo.findById(id);
-        if(!cliente.isPresent())
+        if (!cliente.isPresent())
             throw new RuntimeException("Cliente no encontrado");
         return clientesRepo.findById(id);
     }
@@ -37,7 +37,7 @@ public class ClientesServiceImpl implements ClientesService{
     @Override
     public Optional<String> updateClientes(Long id, Clientes newData) {
         Optional<Clientes> cliente = clientesRepo.findById(id);
-        if(!cliente.isPresent())
+        if (!cliente.isPresent())
             throw new RuntimeException("Cliente no encontrado");
         cliente.get().setPrimerNombre(newData.getPrimerNombre());
         cliente.get().setSegundoNombre(newData.getSegundoNombre());
@@ -52,7 +52,7 @@ public class ClientesServiceImpl implements ClientesService{
     @Override
     public Optional<String> deleteClientesById(Long id) {
         Optional<Clientes> cliente = clientesRepo.findById(id);
-        if(!cliente.isPresent())
+        if (!cliente.isPresent())
             throw new RuntimeException("Cliente no encontrado");
         clientesRepo.deleteById(id);
         return Optional.of("Cliente eliminado");

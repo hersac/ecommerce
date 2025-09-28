@@ -24,27 +24,28 @@ public class OrdenesController {
     private OrdenesService servicioOrdenes;
 
     @GetMapping
-    public Optional<List<Ordenes>> getOrdenes(){
+    public Optional<List<Ordenes>> getOrdenes() {
         return servicioOrdenes.getOrdenes();
     }
 
     @GetMapping("/{id}")
-    public Optional<Ordenes> getOrdenById(@PathVariable Long id){
+    public Optional<Ordenes> getOrdenById(@PathVariable Long id) {
         return servicioOrdenes.getOrdenById(id);
     }
 
     @PostMapping
-    public Optional<String> addOrden(@RequestBody Ordenes newOrden ){
+    public Optional<String> addOrden(@RequestBody Ordenes newOrden) {
         return servicioOrdenes.addOrden(newOrden);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateOrden(@PathVariable Long id, @RequestBody Ordenes newData){
+    public Optional<String> updateOrden(@PathVariable Long id,
+            @RequestBody Ordenes newData) {
         return servicioOrdenes.updateOrden(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteOrden(@PathVariable Long id){
+    public Optional<String> deleteOrden(@PathVariable Long id) {
         return servicioOrdenes.deleteOrdenById(id);
     }
 }

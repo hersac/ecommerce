@@ -22,34 +22,40 @@ public class DetallesOrdenesServiceImpl implements DetallesOrdenesService {
     }
 
     @Override
-    public Optional<DetallesOrdenes> getDetallesOrdenesById(Long id){
-        Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo.findById(id);
+    public Optional<DetallesOrdenes> getDetallesOrdenesById(Long id) {
+        Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo
+                .findById(id);
         if (!detallesOrdenes.isPresent())
             throw new ItemNotFoundException("Detalles de orden no encontrados");
         return detallesOrdenes;
     }
 
     @Override
-    public Optional<String> addDetallesOrdenes(DetallesOrdenes detallesOrdenes) {
+    public Optional<String> addDetallesOrdenes(
+            DetallesOrdenes detallesOrdenes) {
         detallesOrdenesRepo.save(detallesOrdenes);
         return Optional.of("Detalles de orden creados correctamente");
     }
 
     @Override
-    public Optional<String> updateDetallesOrdenes(Long id, DetallesOrdenes detallesOrdenes) {
-        Optional<DetallesOrdenes> detallesOrdenesAnterior = detallesOrdenesRepo.findById(id);
+    public Optional<String> updateDetallesOrdenes(Long id,
+            DetallesOrdenes detallesOrdenes) {
+        Optional<DetallesOrdenes> detallesOrdenesAnterior = detallesOrdenesRepo
+                .findById(id);
         if (!detallesOrdenesAnterior.isPresent())
             throw new ItemNotFoundException("Detalles de orden no encontrados");
         detallesOrdenesAnterior.get().setOrdenId(detallesOrdenes.getOrdenId());
         detallesOrdenesAnterior.get().setProdId(detallesOrdenes.getProdId());
-        detallesOrdenesAnterior.get().setCantidad(detallesOrdenes.getCantidad());
+        detallesOrdenesAnterior.get()
+                .setCantidad(detallesOrdenes.getCantidad());
         detallesOrdenesRepo.save(detallesOrdenesAnterior.get());
         return Optional.of("Detalles de orden actualizados correctamente");
     }
 
     @Override
     public Optional<String> deleteDetallesOrdenesById(Long id) {
-        Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo.findById(id);
+        Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo
+                .findById(id);
         if (!detallesOrdenes.isPresent())
             throw new ItemNotFoundException("Detalles de orden no encontrados");
         detallesOrdenesRepo.deleteById(id);

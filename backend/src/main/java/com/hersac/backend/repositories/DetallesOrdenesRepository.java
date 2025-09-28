@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.hersac.backend.models.DetallesOrdenes;
 
 @Repository
-public interface DetallesOrdenesRepository extends JpaRepository<DetallesOrdenes, Long> {
+public interface DetallesOrdenesRepository
+        extends
+            JpaRepository<DetallesOrdenes, Long> {
 
 }

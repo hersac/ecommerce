@@ -24,27 +24,29 @@ public class DetallesCCController {
     private DetallesCCService detallesCCService;
 
     @GetMapping
-    public Optional<List<DetallesCC>> getDetallesOrdenes(){
+    public Optional<List<DetallesCC>> getDetallesOrdenes() {
         return detallesCCService.getDetallesCC();
     }
 
     @GetMapping("/{id}")
-    public Optional<DetallesCC> getDetallesOrdenesById(@PathVariable Long id){
+    public Optional<DetallesCC> getDetallesOrdenesById(@PathVariable Long id) {
         return detallesCCService.getDetallesCCById(id);
     }
 
     @PostMapping
-    public Optional<String> addDetallesOrdenes(@RequestBody DetallesCC newDetallesOrdenes){
+    public Optional<String> addDetallesOrdenes(
+            @RequestBody DetallesCC newDetallesOrdenes) {
         return detallesCCService.addDetallesCC(newDetallesOrdenes);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateDetallesOrdenes(@PathVariable Long id, @RequestBody DetallesCC newData){
+    public Optional<String> updateDetallesOrdenes(@PathVariable Long id,
+            @RequestBody DetallesCC newData) {
         return detallesCCService.updateDetallesCC(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteDetallesOrdenes(@PathVariable Long id){
+    public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
         return detallesCCService.deleteDetallesCCById(id);
     }
 

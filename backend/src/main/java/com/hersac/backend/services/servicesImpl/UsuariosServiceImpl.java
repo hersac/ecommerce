@@ -24,21 +24,21 @@ public class UsuariosServiceImpl implements UsuariosService {
     @Override
     public Optional<Usuarios> getUsuarioById(Long id) {
         Optional<Usuarios> usuario = usuarioRepo.findById(id);
-        if(!usuario.isPresent())
+        if (!usuario.isPresent())
             throw new ItemNotFoundException("Usuario no encontrado");
         return usuario;
     }
 
     @Override
-    public Optional<String> addUsuario(Usuarios usuario){
+    public Optional<String> addUsuario(Usuarios usuario) {
         usuarioRepo.save(usuario);
         return Optional.of("Usuario creado correctamente");
     }
 
     @Override
-    public Optional<String> updateUsuario(Long id, Usuarios usuario){
+    public Optional<String> updateUsuario(Long id, Usuarios usuario) {
         Optional<Usuarios> usuarioAnterior = usuarioRepo.findById(id);
-        if(!usuarioAnterior.isPresent())
+        if (!usuarioAnterior.isPresent())
             throw new ItemNotFoundException("Usuario no encontrado");
         usuarioAnterior.get().setEmail(usuario.getEmail());
         usuarioAnterior.get().setPassword(usuario.getPassword());
@@ -53,11 +53,11 @@ public class UsuariosServiceImpl implements UsuariosService {
         usuarioRepo.save(usuarioAnterior.get());
         return Optional.of("Usuario actualizado correctamente");
     }
-    
+
     @Override
-    public Optional<String> deleteUsuarioById(Long id){
+    public Optional<String> deleteUsuarioById(Long id) {
         Optional<Usuarios> usuario = usuarioRepo.findById(id);
-        if(!usuario.isPresent())
+        if (!usuario.isPresent())
             throw new ItemNotFoundException("Usuario no encontrado");
         usuarioRepo.deleteById(id);
         return Optional.of("Usuario eliminado correctamente");

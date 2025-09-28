@@ -24,27 +24,30 @@ public class DetallesOrdenesController {
     private DetallesOrdenesService detallesOrdenesServ;
 
     @GetMapping
-    public Optional<List<DetallesOrdenes>> getDetallesOrdenes(){
+    public Optional<List<DetallesOrdenes>> getDetallesOrdenes() {
         return detallesOrdenesServ.getDetallesOrdenes();
     }
 
     @GetMapping("/{id}")
-    public Optional<DetallesOrdenes> getDetallesOrdenesById(@PathVariable Long id){
+    public Optional<DetallesOrdenes> getDetallesOrdenesById(
+            @PathVariable Long id) {
         return detallesOrdenesServ.getDetallesOrdenesById(id);
     }
 
     @PostMapping
-    public Optional<String> addDetallesOrdenes(@RequestBody DetallesOrdenes newDetallesOrdenes){
+    public Optional<String> addDetallesOrdenes(
+            @RequestBody DetallesOrdenes newDetallesOrdenes) {
         return detallesOrdenesServ.addDetallesOrdenes(newDetallesOrdenes);
     }
 
     @PutMapping("/{id}")
-    public Optional<String> updateDetallesOrdenes(@PathVariable Long id, @RequestBody DetallesOrdenes newData){
+    public Optional<String> updateDetallesOrdenes(@PathVariable Long id,
+            @RequestBody DetallesOrdenes newData) {
         return detallesOrdenesServ.updateDetallesOrdenes(id, newData);
     }
 
     @DeleteMapping("/{id}")
-    public Optional<String> deleteDetallesOrdenes(@PathVariable Long id){
+    public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
         return detallesOrdenesServ.deleteDetallesOrdenesById(id);
     }
 }
