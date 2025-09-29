@@ -1,0 +1,64 @@
+package com.hersac.backend.modules.comercial.clientes.services.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.hersac.backend.modules.comercial.clientes.models.Clientes;
+import com.hersac.backend.modules.comercial.clientes.models.repositories.ClientesRepository;
+import com.hersac.backend.modules.comercial.clientes.services.ClientesService;
+
+@Service
+public class ClientesServiceImpl implements ClientesService {
+
+	private final ClientesRepository clientesRepo;
+
+	public ClientesServiceImpl(ClientesRepository clientesRepo) {
+		this.clientesRepo = clientesRepo;
+	}
+
+	@Override
+	public Optional<List<Clientes>> getClientes() {
+		return Optional.ofNullable(clientesRepo.findAll());
+	}
+
+	@Override
+	public Optional<Clientes> getClientesById(Long id) {
+		Optional<Clientes> cliente = clientesRepo.findById(id);
+		if (!cliente.isPresent())
+			throw new RuntimeException("Cliente no encontrado");
+		return clientesRepo.findById(id);
+	}
+
+	@Override
+	public Optional<String> addClientes(Clientes newClientes) {
+		clientesRepo.save(newClientes);
+		return Optional.of("Cliente agregado");
+	}
+
+	@Override
+	public Optional<String> updateClientes(Long id, Clientes newData) {
+		Optional<Clientes> cliente = clientesRepo.findById(id);
+		if (!cliente.isPresent())
+			throw new RuntimeException("Cliente no encontrado");
+		cliente.get().setPrimerNombre(newData.getPrimerNombre());
+		cliente.get().setSegundoNombre(newData.getSegundoNombre());
+		cliente.get().setPrimerApellido(newData.getPrimerApellido());
+		cliente.get().setSegundoApellido(newData.getSegundoApellido());
+		cliente.get().setTipoDocumento(newData.getTipoDocumento());
+		cliente.get().setIdentificacion(newData.getIdentificacion());
+		clientesRepo.save(cliente.get());
+		return Optional.of("Cliente actualizado");
+	}
+
+	@Override
+	public Optional<String> deleteClientesById(Long id) {
+		Optional<Clientes> cliente = clientesRepo.findById(id);
+		if (!cliente.isPresent())
+			throw new RuntimeException("Cliente no encontrado");
+		clientesRepo.deleteById(id);
+		return Optional.of("Cliente eliminado");
+	}
+
+}

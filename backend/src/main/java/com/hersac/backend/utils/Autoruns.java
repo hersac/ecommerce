@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.hersac.backend.models.Usuarios;
-import com.hersac.backend.repositories.UsuariosRepository;
+import com.hersac.backend.modules.users.usuarios.models.Usuarios;
+import com.hersac.backend.modules.users.usuarios.models.repositories.UsuariosRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -24,7 +24,7 @@ public class Autoruns implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Date fechaHoy = new Date();
 		List<Usuarios> defaultUsuarios = Arrays
-			.asList(new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, ""));
+				.asList(new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, ""));
 		usuariosRepo.saveAll(defaultUsuarios);
 	}
 
