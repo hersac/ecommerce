@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.controllers.exceptions.ItemNotFoundException;
@@ -14,8 +13,11 @@ import com.hersac.backend.services.UsuariosService;
 @Service
 public class UsuariosServiceImpl implements UsuariosService {
 
-	@Autowired
-	private UsuariosRepository usuarioRepo;
+	private final UsuariosRepository usuarioRepo;
+
+	public UsuariosServiceImpl(UsuariosRepository usuarioRepo) {
+		this.usuarioRepo = usuarioRepo;
+	}
 
 	@Override
 	public Optional<List<Usuarios>> getUsuarios() {

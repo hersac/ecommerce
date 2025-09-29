@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.controllers.exceptions.ItemNotFoundException;
@@ -14,8 +13,11 @@ import com.hersac.backend.services.OrdenesService;
 @Service
 public class OrdenesServiceImpl implements OrdenesService {
 
-	@Autowired
-	private OrdenesRepository ordenRepo;
+	private final OrdenesRepository ordenRepo;
+
+	public OrdenesServiceImpl(OrdenesRepository ordenRepo) {
+		this.ordenRepo = ordenRepo;
+	}
 
 	@Override
 	public Optional<List<Ordenes>> getOrdenes() {

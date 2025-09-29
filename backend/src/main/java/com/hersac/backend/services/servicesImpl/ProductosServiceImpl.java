@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.models.Productos;
@@ -13,8 +12,11 @@ import com.hersac.backend.services.ProductosService;
 @Service
 public class ProductosServiceImpl implements ProductosService {
 
-	@Autowired
-	private ProductosRepository productosRepo;
+	private final ProductosRepository productosRepo;
+
+	public ProductosServiceImpl(ProductosRepository productosRepo) {
+		this.productosRepo = productosRepo;
+	}
 
 	@Override
 	public Optional<List<Productos>> getProductos() {

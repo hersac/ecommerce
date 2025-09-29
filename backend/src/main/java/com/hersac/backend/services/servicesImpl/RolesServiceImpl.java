@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.controllers.exceptions.ItemNotFoundException;
@@ -14,8 +13,11 @@ import com.hersac.backend.services.RolesService;
 @Service
 public class RolesServiceImpl implements RolesService {
 
-	@Autowired
-	private RolesRepository rolesRepo;
+	private final RolesRepository rolesRepo;
+
+	public RolesServiceImpl(RolesRepository rolesRepo) {
+		this.rolesRepo = rolesRepo;
+	}
 
 	@Override
 	public Optional<List<Roles>> getRoles() {

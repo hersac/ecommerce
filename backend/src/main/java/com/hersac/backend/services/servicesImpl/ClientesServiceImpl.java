@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.models.Clientes;
@@ -13,8 +12,11 @@ import com.hersac.backend.services.ClientesService;
 @Service
 public class ClientesServiceImpl implements ClientesService {
 
-	@Autowired
-	private ClientesRepository clientesRepo;
+	private final ClientesRepository clientesRepo;
+
+	public ClientesServiceImpl(ClientesRepository clientesRepo) {
+		this.clientesRepo = clientesRepo;
+	}
 
 	@Override
 	public Optional<List<Clientes>> getClientes() {

@@ -3,7 +3,6 @@ package com.hersac.backend.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +19,11 @@ import com.hersac.backend.services.DetallesOrdenesService;
 @RequestMapping("/api/detallesOrdenes")
 public class DetallesOrdenesController {
 
-	@Autowired
-	private DetallesOrdenesService detallesOrdenesServ;
+	private final DetallesOrdenesService detallesOrdenesServ;
+
+	public DetallesOrdenesController(DetallesOrdenesService detallesOrdenesServ) {
+		this.detallesOrdenesServ = detallesOrdenesServ;
+	}
 
 	@GetMapping
 	public Optional<List<DetallesOrdenes>> getDetallesOrdenes() {

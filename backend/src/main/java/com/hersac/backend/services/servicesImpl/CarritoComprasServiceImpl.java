@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.models.CarritoCompras;
@@ -13,8 +12,11 @@ import com.hersac.backend.services.CarritoComprasService;
 @Service
 public class CarritoComprasServiceImpl implements CarritoComprasService {
 
-	@Autowired
-	private CarritoComprasRepository carritoComprasRepo;
+	private final CarritoComprasRepository carritoComprasRepo;
+
+	public CarritoComprasServiceImpl(CarritoComprasRepository carritoComprasRepo) {
+		this.carritoComprasRepo = carritoComprasRepo;
+	}
 
 	@Override
 	public Optional<List<CarritoCompras>> getCarritoCompras() {

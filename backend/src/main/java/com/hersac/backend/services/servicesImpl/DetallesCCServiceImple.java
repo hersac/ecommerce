@@ -3,7 +3,6 @@ package com.hersac.backend.services.servicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.controllers.exceptions.ItemNotFoundException;
@@ -14,8 +13,11 @@ import com.hersac.backend.services.DetallesCCService;
 @Service
 public class DetallesCCServiceImple implements DetallesCCService {
 
-	@Autowired
-	private DetallesCCRepository detallesCCRepo;
+	private final DetallesCCRepository detallesCCRepo;
+
+	public DetallesCCServiceImple(DetallesCCRepository detallesCCRepo) {
+		this.detallesCCRepo = detallesCCRepo;
+	}
 
 	@Override
 	public Optional<List<DetallesCC>> getDetallesCC() {
