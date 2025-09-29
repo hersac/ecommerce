@@ -1,6 +1,4 @@
-package com.hersac.backend.modules.comercial.carritocompras.models;
-
-import java.util.Date;
+package com.hersac.backend.modules.comercial.detallesordenes.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,22 +10,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "carritos_compras")
+@Table(name = "detalles_ordenes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CarritoCompras {
+public class DetalleOrden {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long carritoId;
+	private Long detallesOCId;
 
-	private Long userId;
+	private Long ordenId;
 
-	private String identificacion;
+	private Long prodId;
 
-	private Date fecha;
-
-	private Boolean estadoCarrito;
+	private Integer cantidad;
 
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.comercial.productos.models.Productos;
+import com.hersac.backend.modules.comercial.productos.models.Producto;
 import com.hersac.backend.modules.comercial.productos.services.ProductosService;
 
 @RestController
@@ -26,28 +26,28 @@ public class ProductosController {
 	}
 
 	@GetMapping
-	public Optional<List<Productos>> getProductos() {
-		return productosServ.getProductos();
+	public Optional<List<Producto>> buscarTodos() {
+		return productosServ.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Productos> getProductoById(@PathVariable Long id) {
-		return productosServ.getProductoById(id);
+	public Optional<Producto> buscarPorId(@PathVariable Long id) {
+		return productosServ.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addProductos(@RequestBody Productos newProducto) {
-		return productosServ.addProducto(newProducto);
+	public Optional<String> crear(@RequestBody Producto nuevoProducto) {
+		return productosServ.crear(nuevoProducto);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateProducto(@PathVariable Long id, @RequestBody Productos newData) {
-		return productosServ.updateProducto(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody Producto nuevaData) {
+		return productosServ.actualizar(id, nuevaData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteProducto(@PathVariable Long id) {
-		return productosServ.deleteProductoById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return productosServ.eliminar(id);
 	}
 
 }

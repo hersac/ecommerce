@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.hersac.backend.modules.users.roles.models.Rol;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Rol, Long> {
+public interface RolRepository extends JpaRepository<Rol, Long> {
 
 }

@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hersac.backend.modules.comercial.carritocompras.models.CarritoCompras;
-import com.hersac.backend.modules.comercial.carritocompras.services.CarritoComprasService;
+import com.hersac.backend.modules.comercial.carritocompras.services.CarritosComprasService;
 
 @RestController
 @RequestMapping("/api/carritoCompras")
 public class CarritoComprasController {
 
-	private final CarritoComprasService carritoComprasService;
+	private final CarritosComprasService carritoComprasService;
 
-	public CarritoComprasController(CarritoComprasService carritoComprasService) {
+	public CarritoComprasController(CarritosComprasService carritoComprasService) {
 		this.carritoComprasService = carritoComprasService;
 	}
 
 	@GetMapping
-	public Optional<List<CarritoCompras>> getCarritoCompras() {
-		return carritoComprasService.getCarritoCompras();
+	public Optional<List<CarritoCompras>> buscarTodos() {
+		return carritoComprasService.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<CarritoCompras> getCarritoComprasById(@PathVariable Long id) {
-		return carritoComprasService.getCarritoComprasById(id);
+	public Optional<CarritoCompras> buscarPorId(@PathVariable Long id) {
+		return carritoComprasService.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addCarritoCompras(@RequestBody CarritoCompras newCarritoCompras) {
-		return carritoComprasService.addCarritoCompras(newCarritoCompras);
+	public Optional<String> crear(@RequestBody CarritoCompras newCarritoCompras) {
+		return carritoComprasService.crear(newCarritoCompras);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateCarritoCompras(@PathVariable Long id, @RequestBody CarritoCompras newData) {
-		return carritoComprasService.updateCarritoCompras(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody CarritoCompras newData) {
+		return carritoComprasService.actualizar(id, newData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteCarritoCompras(@PathVariable Long id) {
-		return carritoComprasService.deleteCarritoComprasById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return carritoComprasService.eliminar(id);
 	}
 
 }

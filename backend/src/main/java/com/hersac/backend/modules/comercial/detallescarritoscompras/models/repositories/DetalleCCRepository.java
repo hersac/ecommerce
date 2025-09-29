@@ -3,9 +3,9 @@ package com.hersac.backend.modules.comercial.detallescarritoscompras.models.repo
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetallesCC;
+import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetalleCC;
 
 @Repository
-public interface DetallesCCRepository extends JpaRepository<DetallesCC, Long> {
+public interface DetalleCCRepository extends JpaRepository<DetalleCC, Long> {
 
 }

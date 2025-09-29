@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.users.usuarios.models.Usuarios;
+import com.hersac.backend.modules.users.usuarios.models.Usuario;
 import com.hersac.backend.modules.users.usuarios.services.UsuariosService;
 
 @RestController
@@ -26,28 +26,28 @@ public class UsuariosController {
 	}
 
 	@GetMapping
-	public Optional<List<Usuarios>> getUsuarios() {
-		return usuariosServ.getUsuarios();
+	public Optional<List<Usuario>> buscarTodos() {
+		return usuariosServ.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Usuarios> getUsuarioById(@PathVariable Long id) {
-		return usuariosServ.getUsuarioById(id);
+	public Optional<Usuario> buscarPorId(@PathVariable Long id) {
+		return usuariosServ.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addUsuarios(@RequestBody Usuarios newUser) {
-		return usuariosServ.addUsuario(newUser);
+	public Optional<String> crear(@RequestBody Usuario nuevoUsuario) {
+		return usuariosServ.crear(nuevoUsuario);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateUsuario(@PathVariable Long id, @RequestBody Usuarios newData) {
-		return usuariosServ.updateUsuario(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody Usuario nuevaData) {
+		return usuariosServ.actualizar(id, nuevaData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteUsuario(@PathVariable Long id) {
-		return usuariosServ.deleteUsuarioById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return usuariosServ.eliminar(id);
 	}
 
 }

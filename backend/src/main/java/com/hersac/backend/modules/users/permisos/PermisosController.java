@@ -13,39 +13,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.users.permisos.models.Permisos;
+import com.hersac.backend.modules.users.permisos.models.Permiso;
 import com.hersac.backend.modules.users.permisos.services.PermisosService;
 
 @RestController
 @RequestMapping("/api/permisos")
 public class PermisosController {
 
-	@Autowired
-	private PermisosService service;
+	private final PermisosService permisosService;
+
+	public PermisosController(PermisosService permisosService) {
+		this.permisosService = permisosService;
+	}
 
 	@GetMapping
-	public List<Permisos> getPermisos() {
-		return service.getPermisos();
+	public List<Permiso> buscarTodos() {
+		return permisosService.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Permisos> getPermisoById(@PathVariable Long id) {
-		return service.getPermisoById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Permiso> buscarPorId(@PathVariable Long id) {
+		return permisosService.buscarPorId(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping
-	public Permisos createPermiso(@RequestBody Permisos permiso) {
-		return service.createPermiso(permiso);
+	public Permiso crear(@RequestBody Permiso nuevoPermiso) {
+		return permisosService.crear(nuevoPermiso);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Permisos> updatePermiso(@PathVariable Long id, @RequestBody Permisos permiso) {
-		return service.updatePermiso(id, permiso).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Permiso> actualizar(@PathVariable Long id, @RequestBody Permiso nuevaData) {
+		return permisosService.actualizar(id, nuevaData)
+			.map(ResponseEntity::ok)
+			.orElse(ResponseEntity.notFound().build());
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletePermiso(@PathVariable Long id) {
-		return service.deletePermiso(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+		return permisosService.eliminar(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+	}
+
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<Permiso> buscarPorNombre(@PathVariable String nombre) {
+		return ResponseEntity.ok().body(permisosService.buscarPorNombre(nombre).get());
 	}
 
 }

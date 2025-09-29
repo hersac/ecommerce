@@ -6,59 +6,59 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.globals.exceptions.ItemNotFoundException;
-import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetallesCC;
-import com.hersac.backend.modules.comercial.detallescarritoscompras.models.repositories.DetallesCCRepository;
+import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetalleCC;
+import com.hersac.backend.modules.comercial.detallescarritoscompras.models.repositories.DetalleCCRepository;
 import com.hersac.backend.modules.comercial.detallescarritoscompras.services.DetallesCCService;
 
 @Service
 public class DetallesCCServiceImple implements DetallesCCService {
 
-	private final DetallesCCRepository detallesCCRepo;
+	private final DetalleCCRepository detalleCCRepo;
 
-	public DetallesCCServiceImple(DetallesCCRepository detallesCCRepo) {
-		this.detallesCCRepo = detallesCCRepo;
+	public DetallesCCServiceImple(DetalleCCRepository detalleCCRepo) {
+		this.detalleCCRepo = detalleCCRepo;
 	}
 
 	@Override
-	public Optional<List<DetallesCC>> getDetallesCC() {
-		return Optional.of(detallesCCRepo.findAll());
+	public Optional<List<DetalleCC>> buscarTodos() {
+		return Optional.of(detalleCCRepo.findAll());
 	}
 
 	@Override
-	public Optional<DetallesCC> getDetallesCCById(Long id) {
-		Optional<DetallesCC> detallesCC = detallesCCRepo.findById(id);
+	public Optional<DetalleCC> buscarPorId(Long id) {
+		Optional<DetalleCC> detallesCC = detalleCCRepo.findById(id);
 		if (!detallesCC.isPresent())
 			throw new ItemNotFoundException("Detalles de carrito de compras no encontrados");
 		return detallesCC;
 	}
 
 	@Override
-	public Optional<String> addDetallesCC(DetallesCC detallesCC) {
-		detallesCCRepo.save(detallesCC);
+	public Optional<String> crear(DetalleCC nuevoDetalleCC) {
+		detalleCCRepo.save(nuevoDetalleCC);
 		return Optional.of("Detalles de carrito de compra creados correctamente");
 	}
 
 	@Override
-	public Optional<String> updateDetallesCC(Long id, DetallesCC detallesCC) {
-		Optional<DetallesCC> detallesCCAnterior = detallesCCRepo.findById(id);
+	public Optional<String> actualizar(Long id, DetalleCC nuevaData) {
+		Optional<DetalleCC> detallesCCAnterior = detalleCCRepo.findById(id);
 		if (!detallesCCAnterior.isPresent())
 			throw new ItemNotFoundException("Detalles de carrito de compras no encontrados");
 
-		detallesCCAnterior.get().setIdentificacion(detallesCC.getIdentificacion());
-		detallesCCAnterior.get().setProdId(detallesCC.getProdId());
-		detallesCCAnterior.get().setCantidad(detallesCC.getCantidad());
-		detallesCCAnterior.get().setPrecioUnitario(detallesCC.getPrecioUnitario());
-		detallesCCAnterior.get().setSubtotal(detallesCC.getSubtotal());
-		detallesCCRepo.save(detallesCCAnterior.get());
+		detallesCCAnterior.get().setIdentificacion(nuevaData.getIdentificacion());
+		detallesCCAnterior.get().setProdId(nuevaData.getProdId());
+		detallesCCAnterior.get().setCantidad(nuevaData.getCantidad());
+		detallesCCAnterior.get().setPrecioUnitario(nuevaData.getPrecioUnitario());
+		detallesCCAnterior.get().setSubtotal(nuevaData.getSubtotal());
+		detalleCCRepo.save(detallesCCAnterior.get());
 		return Optional.of("Detalles de carrito de compras actualizados correctamente");
 	}
 
 	@Override
-	public Optional<String> deleteDetallesCCById(Long id) {
-		Optional<DetallesCC> detallesCC = detallesCCRepo.findById(id);
+	public Optional<String> eliminar(Long id) {
+		Optional<DetalleCC> detallesCC = detalleCCRepo.findById(id);
 		if (!detallesCC.isPresent())
 			throw new ItemNotFoundException("Detalles de carrito de compras no encontrados");
-		detallesCCRepo.deleteById(id);
+		detalleCCRepo.deleteById(id);
 		return Optional.of("Detalles de carrito de compras eliminados correctamente");
 	}
 

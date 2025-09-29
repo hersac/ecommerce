@@ -8,12 +8,12 @@ import com.hersac.backend.modules.users.rolespermisos.models.RolPermisoId;
 
 public interface RolesPermisosService {
 
-	List<RolPermiso> getRolesPermisos();
+	List<RolPermiso> buscarTodos();
 
-	Optional<RolPermiso> getRolesPermisosById(RolPermisoId id);
+	Optional<RolPermiso> buscarPorId(RolPermisoId id);
 
-	RolPermiso createRolesPermisos(RolPermiso rolPermiso);
+	RolPermiso crear(RolPermiso rolPermiso);
 
-	boolean deleteRolesPermisos(RolPermisoId id);
+	boolean eliminar(RolPermisoId id);
 
 }

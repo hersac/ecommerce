@@ -7,14 +7,14 @@ import com.hersac.backend.modules.users.roles.models.Rol;
 
 public interface RolesService {
 
-	public Optional<List<Rol>> getRoles();
+	public Optional<List<Rol>> buscarTodos();
 
-	public Optional<Rol> getRolById(Long id);
+	public Optional<Rol> buscarPorId(Long id);
 
-	public Optional<String> addRol(Rol rol);
+	public Optional<String> crear(Rol nuevoRol);
 
-	public Optional<String> updateRol(Long id, Rol rol);
+	public Optional<String> actualizar(Long id, Rol nuevaData);
 
-	public Optional<String> deleteRolById(Long id);
+	public Optional<String> eliminar(Long id);
 
 }

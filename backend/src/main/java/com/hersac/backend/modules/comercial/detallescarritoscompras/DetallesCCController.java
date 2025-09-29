@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetallesCC;
+import com.hersac.backend.modules.comercial.detallescarritoscompras.models.DetalleCC;
 import com.hersac.backend.modules.comercial.detallescarritoscompras.services.DetallesCCService;
 
 @RestController
@@ -26,28 +26,28 @@ public class DetallesCCController {
 	}
 
 	@GetMapping
-	public Optional<List<DetallesCC>> getDetallesOrdenes() {
-		return detallesCCService.getDetallesCC();
+	public Optional<List<DetalleCC>> buscarTodos() {
+		return detallesCCService.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<DetallesCC> getDetallesOrdenesById(@PathVariable Long id) {
-		return detallesCCService.getDetallesCCById(id);
+	public Optional<DetalleCC> buscarPorId(@PathVariable Long id) {
+		return detallesCCService.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addDetallesOrdenes(@RequestBody DetallesCC newDetallesOrdenes) {
-		return detallesCCService.addDetallesCC(newDetallesOrdenes);
+	public Optional<String> crear(@RequestBody DetalleCC newDetallesOrdenes) {
+		return detallesCCService.crear(newDetallesOrdenes);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateDetallesOrdenes(@PathVariable Long id, @RequestBody DetallesCC newData) {
-		return detallesCCService.updateDetallesCC(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody DetalleCC newData) {
+		return detallesCCService.actualizar(id, newData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
-		return detallesCCService.deleteDetallesCCById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return detallesCCService.eliminar(id);
 	}
 
 }

@@ -5,53 +5,53 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.hersac.backend.modules.users.permisos.models.Permisos;
-import com.hersac.backend.modules.users.permisos.models.repositories.PermisosRepository;
+import com.hersac.backend.modules.users.permisos.models.Permiso;
+import com.hersac.backend.modules.users.permisos.models.repositories.PermisoRepository;
 import com.hersac.backend.modules.users.permisos.services.PermisosService;
 
 @Service
 public class PermisosServiceImpl implements PermisosService {
 
-	private final PermisosRepository permisoRepo;
+	private final PermisoRepository permisoRepo;
 
-	public PermisosServiceImpl(PermisosRepository permisoRepo) {
+	public PermisosServiceImpl(PermisoRepository permisoRepo) {
 		this.permisoRepo = permisoRepo;
 	}
 
 	@Override
-	public List<Permisos> getPermisos() {
+	public List<Permiso> buscarTodos() {
 		return permisoRepo.findAll();
 	}
 
 	@Override
-	public Optional<Permisos> getPermisoById(Long id) {
+	public Optional<Permiso> buscarPorId(Long id) {
 		return permisoRepo.findById(id);
 	}
 
 	@Override
-	public Optional<Permisos> getPermisoByNombre(String name) {
-		return permisoRepo.findByNombre(name);
+	public Permiso crear(Permiso nuevoPermiso) {
+		return permisoRepo.save(nuevoPermiso);
 	}
 
 	@Override
-	public Permisos createPermiso(Permisos permiso) {
-		return permisoRepo.save(permiso);
-	}
-
-	@Override
-	public Optional<Permisos> updatePermiso(Long id, Permisos permiso) {
+	public Optional<Permiso> actualizar(Long id, Permiso nuevaData) {
 		return permisoRepo.findById(id).map(p -> {
-			p.setNombre(permiso.getNombre());
+			p.setNombre(nuevaData.getNombre());
 			return permisoRepo.save(p);
 		});
 	}
 
 	@Override
-	public boolean deletePermiso(Long id) {
+	public boolean eliminar(Long id) {
 		return permisoRepo.findById(id).map(p -> {
 			permisoRepo.delete(p);
 			return true;
 		}).orElse(false);
+	}
+
+	@Override
+	public Optional<Permiso> buscarPorNombre(String name) {
+		return permisoRepo.findByNombre(name);
 	}
 
 }

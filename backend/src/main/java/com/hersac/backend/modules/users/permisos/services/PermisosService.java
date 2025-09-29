@@ -3,20 +3,20 @@ package com.hersac.backend.modules.users.permisos.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.hersac.backend.modules.users.permisos.models.Permisos;
+import com.hersac.backend.modules.users.permisos.models.Permiso;
 
 public interface PermisosService {
 
-	List<Permisos> getPermisos();
+	List<Permiso> buscarTodos();
 
-	Optional<Permisos> getPermisoById(Long id);
+	Optional<Permiso> buscarPorId(Long id);
 
-	Optional<Permisos> getPermisoByNombre(String name);
+	Permiso crear(Permiso nuevoPermiso);
 
-	Permisos createPermiso(Permisos permiso);
+	Optional<Permiso> actualizar(Long id, Permiso nuevaData);
 
-	Optional<Permisos> updatePermiso(Long id, Permisos permiso);
+	boolean eliminar(Long id);
 
-	boolean deletePermiso(Long id);
+	Optional<Permiso> buscarPorNombre(String name);
 
 }

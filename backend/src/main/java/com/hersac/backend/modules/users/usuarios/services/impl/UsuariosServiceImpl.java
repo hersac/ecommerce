@@ -6,41 +6,41 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.globals.exceptions.ItemNotFoundException;
-import com.hersac.backend.modules.users.usuarios.models.Usuarios;
-import com.hersac.backend.modules.users.usuarios.models.repositories.UsuariosRepository;
+import com.hersac.backend.modules.users.usuarios.models.Usuario;
+import com.hersac.backend.modules.users.usuarios.models.repositories.UsuarioRepository;
 import com.hersac.backend.modules.users.usuarios.services.UsuariosService;
 
 @Service
 public class UsuariosServiceImpl implements UsuariosService {
 
-	private final UsuariosRepository usuarioRepo;
+	private final UsuarioRepository usuarioRepo;
 
-	public UsuariosServiceImpl(UsuariosRepository usuarioRepo) {
+	public UsuariosServiceImpl(UsuarioRepository usuarioRepo) {
 		this.usuarioRepo = usuarioRepo;
 	}
 
 	@Override
-	public Optional<List<Usuarios>> getUsuarios() {
+	public Optional<List<Usuario>> buscarTodos() {
 		return Optional.of(usuarioRepo.findAll());
 	}
 
 	@Override
-	public Optional<Usuarios> getUsuarioById(Long id) {
-		Optional<Usuarios> usuario = usuarioRepo.findById(id);
+	public Optional<Usuario> buscarPorId(Long id) {
+		Optional<Usuario> usuario = usuarioRepo.findById(id);
 		if (!usuario.isPresent())
 			throw new ItemNotFoundException("Usuario no encontrado");
 		return usuario;
 	}
 
 	@Override
-	public Optional<String> addUsuario(Usuarios usuario) {
+	public Optional<String> crear(Usuario usuario) {
 		usuarioRepo.save(usuario);
 		return Optional.of("Usuario creado correctamente");
 	}
 
 	@Override
-	public Optional<String> updateUsuario(Long id, Usuarios usuario) {
-		Optional<Usuarios> usuarioAnterior = usuarioRepo.findById(id);
+	public Optional<String> actualizar(Long id, Usuario usuario) {
+		Optional<Usuario> usuarioAnterior = usuarioRepo.findById(id);
 		if (!usuarioAnterior.isPresent())
 			throw new ItemNotFoundException("Usuario no encontrado");
 		usuarioAnterior.get().setEmail(usuario.getEmail());
@@ -59,8 +59,8 @@ public class UsuariosServiceImpl implements UsuariosService {
 	}
 
 	@Override
-	public Optional<String> deleteUsuarioById(Long id) {
-		Optional<Usuarios> usuario = usuarioRepo.findById(id);
+	public Optional<String> eliminar(Long id) {
+		Optional<Usuario> usuario = usuarioRepo.findById(id);
 		if (!usuario.isPresent())
 			throw new ItemNotFoundException("Usuario no encontrado");
 		usuarioRepo.deleteById(id);

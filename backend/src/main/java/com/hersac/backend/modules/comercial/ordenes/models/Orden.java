@@ -1,27 +1,33 @@
-package com.hersac.backend.modules.comercial.detallesordenes.models;
+package com.hersac.backend.modules.comercial.ordenes.models;
+
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "ordenes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DetallesOrdenes {
+public class Orden {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long detallesOCId;
-
 	private Long ordenId;
 
-	private Long prodId;
+	private Long userId;
 
-	private Integer cantidad;
+	private Date FechaOrden;
+
+	private String direccionEnvio;
+
+	private Boolean estadoOrden;
 
 }

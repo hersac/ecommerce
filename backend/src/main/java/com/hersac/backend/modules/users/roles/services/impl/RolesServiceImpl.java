@@ -7,25 +7,25 @@ import org.springframework.stereotype.Service;
 
 import com.hersac.backend.globals.exceptions.ItemNotFoundException;
 import com.hersac.backend.modules.users.roles.models.Rol;
-import com.hersac.backend.modules.users.roles.models.repositories.RolesRepository;
+import com.hersac.backend.modules.users.roles.models.repositories.RolRepository;
 import com.hersac.backend.modules.users.roles.services.RolesService;
 
 @Service
 public class RolesServiceImpl implements RolesService {
 
-	private final RolesRepository rolesRepo;
+	private final RolRepository rolesRepo;
 
-	public RolesServiceImpl(RolesRepository rolesRepo) {
+	public RolesServiceImpl(RolRepository rolesRepo) {
 		this.rolesRepo = rolesRepo;
 	}
 
 	@Override
-	public Optional<List<Rol>> getRoles() {
+	public Optional<List<Rol>> buscarTodos() {
 		return Optional.of(rolesRepo.findAll());
 	}
 
 	@Override
-	public Optional<Rol> getRolById(Long id) {
+	public Optional<Rol> buscarPorId(Long id) {
 		Optional<Rol> rol = rolesRepo.findById(id);
 		if (!rol.isPresent())
 			throw new ItemNotFoundException("Rol no encontrado");
@@ -33,24 +33,24 @@ public class RolesServiceImpl implements RolesService {
 	}
 
 	@Override
-	public Optional<String> addRol(Rol rol) {
-		rolesRepo.save(rol);
+	public Optional<String> crear(Rol nuevoRol) {
+		rolesRepo.save(nuevoRol);
 		return Optional.of("Rol creado correctamente");
 	}
 
 	@Override
-	public Optional<String> updateRol(Long id, Rol rol) {
+	public Optional<String> actualizar(Long id, Rol nuevaData) {
 		Optional<Rol> rolAnterior = rolesRepo.findById(id);
 		if (!rolAnterior.isPresent())
 			throw new ItemNotFoundException("Rol no encontrado");
-		rolAnterior.get().setNombreRol(rol.getNombreRol());
+		rolAnterior.get().setNombreRol(nuevaData.getNombreRol());
 
 		rolesRepo.save(rolAnterior.get());
 		return Optional.of("Rol actualizado correctamente");
 	}
 
 	@Override
-	public Optional<String> deleteRolById(Long id) {
+	public Optional<String> eliminar(Long id) {
 		Optional<Rol> usuario = rolesRepo.findById(id);
 		if (!usuario.isPresent())
 			throw new ItemNotFoundException("Rol no encontrado");

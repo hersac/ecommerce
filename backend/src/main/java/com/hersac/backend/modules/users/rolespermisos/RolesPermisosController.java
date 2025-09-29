@@ -26,27 +26,25 @@ public class RolesPermisosController {
 	}
 
 	@GetMapping
-	public List<RolPermiso> getRolesPermisos() {
-		return rolesPermisosService.getRolesPermisos();
+	public List<RolPermiso> buscarTodos() {
+		return rolesPermisosService.buscarTodos();
 	}
 
 	@GetMapping("/rol/{rolId}/permiso/{permisoId}")
-	public ResponseEntity<RolPermiso> getRolesPermisosById(@PathVariable Long rolId, @PathVariable Long permisoId) {
+	public ResponseEntity<RolPermiso> buscarPorId(@PathVariable Long rolId, @PathVariable Long permisoId) {
 		RolPermisoId id = new RolPermisoId(rolId, permisoId);
-		return rolesPermisosService.getRolesPermisosById(id)
-				.map(ResponseEntity::ok)
-				.orElse(ResponseEntity.notFound().build());
+		return rolesPermisosService.buscarPorId(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
 	@PostMapping
-	public RolPermiso createRolesPermisos(@RequestBody RolPermiso rolPermiso) {
-		return rolesPermisosService.createRolesPermisos(rolPermiso);
+	public RolPermiso crear(@RequestBody RolPermiso rolPermiso) {
+		return rolesPermisosService.crear(rolPermiso);
 	}
 
 	@DeleteMapping("/rol/{rolId}/permiso/{permisoId}")
-	public ResponseEntity<Void> deleteRolesPermisos(@PathVariable Long rolId, @PathVariable Long permisoId) {
+	public ResponseEntity<Void> eliminar(@PathVariable Long rolId, @PathVariable Long permisoId) {
 		RolPermisoId id = new RolPermisoId(rolId, permisoId);
-		return rolesPermisosService.deleteRolesPermisos(id) ? ResponseEntity.noContent().build()
+		return rolesPermisosService.eliminar(id) ? ResponseEntity.noContent().build()
 				: ResponseEntity.notFound().build();
 	}
 

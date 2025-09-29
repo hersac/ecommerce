@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.comercial.detallesordenes.models.DetallesOrdenes;
+import com.hersac.backend.modules.comercial.detallesordenes.models.DetalleOrden;
 import com.hersac.backend.modules.comercial.detallesordenes.services.DetallesOrdenesService;
 
 @RestController
@@ -26,28 +26,28 @@ public class DetallesOrdenesController {
 	}
 
 	@GetMapping
-	public Optional<List<DetallesOrdenes>> getDetallesOrdenes() {
-		return detallesOrdenesServ.getDetallesOrdenes();
+	public Optional<List<DetalleOrden>> buscarTodos() {
+		return detallesOrdenesServ.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<DetallesOrdenes> getDetallesOrdenesById(@PathVariable Long id) {
-		return detallesOrdenesServ.getDetallesOrdenesById(id);
+	public Optional<DetalleOrden> buscarPorId(@PathVariable Long id) {
+		return detallesOrdenesServ.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addDetallesOrdenes(@RequestBody DetallesOrdenes newDetallesOrdenes) {
-		return detallesOrdenesServ.addDetallesOrdenes(newDetallesOrdenes);
+	public Optional<String> crear(@RequestBody DetalleOrden nuevoDetalleOrden) {
+		return detallesOrdenesServ.crear(nuevoDetalleOrden);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateDetallesOrdenes(@PathVariable Long id, @RequestBody DetallesOrdenes newData) {
-		return detallesOrdenesServ.updateDetallesOrdenes(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody DetalleOrden nuevaData) {
+		return detallesOrdenesServ.actualizar(id, nuevaData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
-		return detallesOrdenesServ.deleteDetallesOrdenesById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return detallesOrdenesServ.eliminar(id);
 	}
 
 }

@@ -1,35 +1,25 @@
-package com.hersac.backend.modules.comercial.productos.models;
+package com.hersac.backend.modules.users.permisos.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "permisos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Productos {
+public class Permiso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long prodId;
+	private Long permisoId;
 
 	private String nombre;
-
-	private String descCorta;
-
-	private String descripcion;
-
-	private Double precio;
-
-	private String referencia;
-
-	private String categoria;
-
-	private Integer disponible;
 
 }

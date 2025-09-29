@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.comercial.clientes.models.Clientes;
+import com.hersac.backend.modules.comercial.clientes.models.Cliente;
 import com.hersac.backend.modules.comercial.clientes.services.ClientesService;
 
 @RestController
@@ -26,28 +26,28 @@ public class ClientesController {
 	}
 
 	@GetMapping
-	public Optional<List<Clientes>> getClientes() {
-		return clientesService.getClientes();
+	public Optional<List<Cliente>> buscarTodos() {
+		return clientesService.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Clientes> getClientesById(@PathVariable Long id) {
-		return clientesService.getClientesById(id);
+	public Optional<Cliente> buscarPorId(@PathVariable Long id) {
+		return clientesService.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addClientes(@RequestBody Clientes newClientes) {
-		return clientesService.addClientes(newClientes);
+	public Optional<String> crear(@RequestBody Cliente nuevoCliente) {
+		return clientesService.crear(nuevoCliente);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateClientes(@PathVariable Long id, @RequestBody Clientes newData) {
-		return clientesService.updateClientes(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody Cliente nuevaData) {
+		return clientesService.actualizar(id, nuevaData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteClientes(@PathVariable Long id) {
-		return clientesService.deleteClientesById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return clientesService.eliminar(id);
 	}
 
 }

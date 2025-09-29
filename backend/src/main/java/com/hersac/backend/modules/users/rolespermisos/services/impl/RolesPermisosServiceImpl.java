@@ -20,22 +20,22 @@ public class RolesPermisosServiceImpl implements RolesPermisosService {
 	}
 
 	@Override
-	public List<RolPermiso> getRolesPermisos() {
+	public List<RolPermiso> buscarTodos() {
 		return rolesPermisosRepo.findAll();
 	}
 
 	@Override
-	public Optional<RolPermiso> getRolesPermisosById(RolPermisoId id) {
+	public Optional<RolPermiso> buscarPorId(RolPermisoId id) {
 		return rolesPermisosRepo.findById(id);
 	}
 
 	@Override
-	public RolPermiso createRolesPermisos(RolPermiso rolPermiso) {
+	public RolPermiso crear(RolPermiso rolPermiso) {
 		return rolesPermisosRepo.save(rolPermiso);
 	}
 
 	@Override
-	public boolean deleteRolesPermisos(RolPermisoId id) {
+	public boolean eliminar(RolPermisoId id) {
 		return rolesPermisosRepo.findById(id).map(rp -> {
 			rolesPermisosRepo.delete(rp);
 			return true;

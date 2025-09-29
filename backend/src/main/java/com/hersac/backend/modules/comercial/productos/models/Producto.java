@@ -1,31 +1,37 @@
-package com.hersac.backend.modules.comercial.detallescarritoscompras.models;
+package com.hersac.backend.modules.comercial.productos.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "productos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DetallesCC {
+public class Producto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long detalleId;
-
-	private String identificacion;
-
 	private Long prodId;
 
-	private Integer cantidad;
+	private String nombre;
 
-	private Double precioUnitario;
+	private String descCorta;
 
-	private Double subtotal;
+	private String descripcion;
+
+	private Double precio;
+
+	private String referencia;
+
+	private String categoria;
+
+	private Integer disponible;
 
 }

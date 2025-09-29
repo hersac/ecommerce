@@ -5,59 +5,59 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.hersac.backend.modules.comercial.clientes.models.Clientes;
-import com.hersac.backend.modules.comercial.clientes.models.repositories.ClientesRepository;
+import com.hersac.backend.modules.comercial.clientes.models.Cliente;
+import com.hersac.backend.modules.comercial.clientes.models.repositories.ClienteRepository;
 import com.hersac.backend.modules.comercial.clientes.services.ClientesService;
 
 @Service
 public class ClientesServiceImpl implements ClientesService {
 
-	private final ClientesRepository clientesRepo;
+	private final ClienteRepository clienteRepo;
 
-	public ClientesServiceImpl(ClientesRepository clientesRepo) {
-		this.clientesRepo = clientesRepo;
+	public ClientesServiceImpl(ClienteRepository clienteRepo) {
+		this.clienteRepo = clienteRepo;
 	}
 
 	@Override
-	public Optional<List<Clientes>> getClientes() {
-		return Optional.ofNullable(clientesRepo.findAll());
+	public Optional<List<Cliente>> buscarTodos() {
+		return Optional.ofNullable(clienteRepo.findAll());
 	}
 
 	@Override
-	public Optional<Clientes> getClientesById(Long id) {
-		Optional<Clientes> cliente = clientesRepo.findById(id);
+	public Optional<Cliente> buscarPorId(Long id) {
+		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
 			throw new RuntimeException("Cliente no encontrado");
-		return clientesRepo.findById(id);
+		return clienteRepo.findById(id);
 	}
 
 	@Override
-	public Optional<String> addClientes(Clientes newClientes) {
-		clientesRepo.save(newClientes);
+	public Optional<String> crear(Cliente nuevoCliente) {
+		clienteRepo.save(nuevoCliente);
 		return Optional.of("Cliente agregado");
 	}
 
 	@Override
-	public Optional<String> updateClientes(Long id, Clientes newData) {
-		Optional<Clientes> cliente = clientesRepo.findById(id);
+	public Optional<String> actualizar(Long id, Cliente nuevaData) {
+		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
 			throw new RuntimeException("Cliente no encontrado");
-		cliente.get().setPrimerNombre(newData.getPrimerNombre());
-		cliente.get().setSegundoNombre(newData.getSegundoNombre());
-		cliente.get().setPrimerApellido(newData.getPrimerApellido());
-		cliente.get().setSegundoApellido(newData.getSegundoApellido());
-		cliente.get().setTipoDocumento(newData.getTipoDocumento());
-		cliente.get().setIdentificacion(newData.getIdentificacion());
-		clientesRepo.save(cliente.get());
+		cliente.get().setPrimerNombre(nuevaData.getPrimerNombre());
+		cliente.get().setSegundoNombre(nuevaData.getSegundoNombre());
+		cliente.get().setPrimerApellido(nuevaData.getPrimerApellido());
+		cliente.get().setSegundoApellido(nuevaData.getSegundoApellido());
+		cliente.get().setTipoDocumento(nuevaData.getTipoDocumento());
+		cliente.get().setIdentificacion(nuevaData.getIdentificacion());
+		clienteRepo.save(cliente.get());
 		return Optional.of("Cliente actualizado");
 	}
 
 	@Override
-	public Optional<String> deleteClientesById(Long id) {
-		Optional<Clientes> cliente = clientesRepo.findById(id);
+	public Optional<String> eliminar(Long id) {
+		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
 			throw new RuntimeException("Cliente no encontrado");
-		clientesRepo.deleteById(id);
+		clienteRepo.deleteById(id);
 		return Optional.of("Cliente eliminado");
 	}
 

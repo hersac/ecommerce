@@ -6,56 +6,56 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.hersac.backend.globals.exceptions.ItemNotFoundException;
-import com.hersac.backend.modules.comercial.detallesordenes.models.DetallesOrdenes;
-import com.hersac.backend.modules.comercial.detallesordenes.models.repositories.DetallesOrdenesRepository;
+import com.hersac.backend.modules.comercial.detallesordenes.models.DetalleOrden;
+import com.hersac.backend.modules.comercial.detallesordenes.models.repositories.DetalleOrdenRepository;
 import com.hersac.backend.modules.comercial.detallesordenes.services.DetallesOrdenesService;
 
 @Service
 public class DetallesOrdenesServiceImpl implements DetallesOrdenesService {
 
-	private final DetallesOrdenesRepository detallesOrdenesRepo;
+	private final DetalleOrdenRepository detalleOrdenRepo;
 
-	public DetallesOrdenesServiceImpl(DetallesOrdenesRepository detallesOrdenesRepo) {
-		this.detallesOrdenesRepo = detallesOrdenesRepo;
+	public DetallesOrdenesServiceImpl(DetalleOrdenRepository detalleOrdenRepo) {
+		this.detalleOrdenRepo = detalleOrdenRepo;
 	}
 
 	@Override
-	public Optional<List<DetallesOrdenes>> getDetallesOrdenes() {
-		return Optional.of(detallesOrdenesRepo.findAll());
+	public Optional<List<DetalleOrden>> buscarTodos() {
+		return Optional.of(detalleOrdenRepo.findAll());
 	}
 
 	@Override
-	public Optional<DetallesOrdenes> getDetallesOrdenesById(Long id) {
-		Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo.findById(id);
+	public Optional<DetalleOrden> buscarPorId(Long id) {
+		Optional<DetalleOrden> detallesOrdenes = detalleOrdenRepo.findById(id);
 		if (!detallesOrdenes.isPresent())
 			throw new ItemNotFoundException("Detalles de orden no encontrados");
 		return detallesOrdenes;
 	}
 
 	@Override
-	public Optional<String> addDetallesOrdenes(DetallesOrdenes detallesOrdenes) {
-		detallesOrdenesRepo.save(detallesOrdenes);
+	public Optional<String> crear(DetalleOrden nuevoDetalleOrden) {
+		detalleOrdenRepo.save(nuevoDetalleOrden);
 		return Optional.of("Detalles de orden creados correctamente");
 	}
 
 	@Override
-	public Optional<String> updateDetallesOrdenes(Long id, DetallesOrdenes detallesOrdenes) {
-		Optional<DetallesOrdenes> detallesOrdenesAnterior = detallesOrdenesRepo.findById(id);
+	public Optional<String> actualizar(Long id, DetalleOrden nuevaData) {
+		Optional<DetalleOrden> detallesOrdenesAnterior = detalleOrdenRepo.findById(id);
 		if (!detallesOrdenesAnterior.isPresent())
 			throw new ItemNotFoundException("Detalles de orden no encontrados");
-		detallesOrdenesAnterior.get().setOrdenId(detallesOrdenes.getOrdenId());
-		detallesOrdenesAnterior.get().setProdId(detallesOrdenes.getProdId());
-		detallesOrdenesAnterior.get().setCantidad(detallesOrdenes.getCantidad());
-		detallesOrdenesRepo.save(detallesOrdenesAnterior.get());
+		detallesOrdenesAnterior.get().setOrdenId(nuevaData.getOrdenId());
+		detallesOrdenesAnterior.get().setProdId(nuevaData.getProdId());
+		detallesOrdenesAnterior.get().setCantidad(nuevaData.getCantidad());
+		detalleOrdenRepo.save(detallesOrdenesAnterior.get());
 		return Optional.of("Detalles de orden actualizados correctamente");
 	}
 
 	@Override
-	public Optional<String> deleteDetallesOrdenesById(Long id) {
-		Optional<DetallesOrdenes> detallesOrdenes = detallesOrdenesRepo.findById(id);
+	public Optional<String> eliminar(Long id) {
+		Optional<DetalleOrden> detallesOrdenes = detalleOrdenRepo.findById(id);
 		if (!detallesOrdenes.isPresent())
 			throw new ItemNotFoundException("Detalles de orden no encontrados");
-		detallesOrdenesRepo.deleteById(id);
+		detalleOrdenRepo.deleteById(id);
 		return Optional.of("Detalles de orden eliminados correctamente");
 	}
 

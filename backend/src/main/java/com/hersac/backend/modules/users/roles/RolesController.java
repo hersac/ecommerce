@@ -26,28 +26,28 @@ public class RolesController {
 	}
 
 	@GetMapping
-	public Optional<List<Rol>> getRoles() {
-		return rolesServ.getRoles();
+	public Optional<List<Rol>> buscarTodos() {
+		return rolesServ.buscarTodos();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Rol> getRoleById(@PathVariable Long id) {
-		return rolesServ.getRolById(id);
+	public Optional<Rol> buscarPorId(@PathVariable Long id) {
+		return rolesServ.buscarPorId(id);
 	}
 
 	@PostMapping
-	public Optional<String> addRoles(@RequestBody Rol newRole) {
-		return rolesServ.addRol(newRole);
+	public Optional<String> crear(@RequestBody Rol nuevoRol) {
+		return rolesServ.crear(nuevoRol);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateRole(@PathVariable Long id, @RequestBody Rol newData) {
-		return rolesServ.updateRol(id, newData);
+	public Optional<String> actualizar(@PathVariable Long id, @RequestBody Rol nuevaData) {
+		return rolesServ.actualizar(id, nuevaData);
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> deleteRole(@PathVariable Long id) {
-		return rolesServ.deleteRolById(id);
+	public Optional<String> eliminar(@PathVariable Long id) {
+		return rolesServ.eliminar(id);
 	}
 
 }

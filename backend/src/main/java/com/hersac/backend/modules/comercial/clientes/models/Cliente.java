@@ -1,32 +1,24 @@
-package com.hersac.backend.modules.users.usuarios.models;
-
-import java.util.Date;
-
-import com.hersac.backend.modules.users.roles.models.Rol;
+package com.hersac.backend.modules.comercial.clientes.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "clientes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuarios {
+public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
-
-	private String email;
-
-	private String password;
+	private Long clienteId;
 
 	private String primerNombre;
 
@@ -36,12 +28,8 @@ public class Usuarios {
 
 	private String segundoApellido;
 
+	private String tipoDocumento;
+
 	private String identificacion;
-
-	private Date cumpleaños;
-
-	private String direccion;
-
-	private Long rol;
 
 }
