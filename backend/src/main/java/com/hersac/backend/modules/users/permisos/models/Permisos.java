@@ -1,23 +1,19 @@
-package com.hersac.backend.modules.users.roles.models;
+package com.hersac.backend.modules.users.permisos.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Roles {
+public class Permisos {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long rolId;
+	private Long permisoId;
 
-	private String nombreRol;
+	private String nombre;
 
 }

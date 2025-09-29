@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hersac.backend.modules.users.roles.models.Roles;
+import com.hersac.backend.modules.users.roles.models.Rol;
 import com.hersac.backend.modules.users.roles.services.RolesService;
 
 @RestController
@@ -26,22 +26,22 @@ public class RolesController {
 	}
 
 	@GetMapping
-	public Optional<List<Roles>> getRoles() {
+	public Optional<List<Rol>> getRoles() {
 		return rolesServ.getRoles();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Roles> getRoleById(@PathVariable Long id) {
+	public Optional<Rol> getRoleById(@PathVariable Long id) {
 		return rolesServ.getRolById(id);
 	}
 
 	@PostMapping
-	public Optional<String> addRoles(@RequestBody Roles newRole) {
+	public Optional<String> addRoles(@RequestBody Rol newRole) {
 		return rolesServ.addRol(newRole);
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> updateRole(@PathVariable Long id, @RequestBody Roles newData) {
+	public Optional<String> updateRole(@PathVariable Long id, @RequestBody Rol newData) {
 		return rolesServ.updateRol(id, newData);
 	}
 
