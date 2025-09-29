@@ -20,32 +20,32 @@ import com.hersac.backend.services.OrdenesService;
 @RequestMapping("/api/ordenes")
 public class OrdenesController {
 
-    @Autowired
-    private OrdenesService servicioOrdenes;
+	@Autowired
+	private OrdenesService servicioOrdenes;
 
-    @GetMapping
-    public Optional<List<Ordenes>> getOrdenes() {
-        return servicioOrdenes.getOrdenes();
-    }
+	@GetMapping
+	public Optional<List<Ordenes>> getOrdenes() {
+		return servicioOrdenes.getOrdenes();
+	}
 
-    @GetMapping("/{id}")
-    public Optional<Ordenes> getOrdenById(@PathVariable Long id) {
-        return servicioOrdenes.getOrdenById(id);
-    }
+	@GetMapping("/{id}")
+	public Optional<Ordenes> getOrdenById(@PathVariable Long id) {
+		return servicioOrdenes.getOrdenById(id);
+	}
 
-    @PostMapping
-    public Optional<String> addOrden(@RequestBody Ordenes newOrden) {
-        return servicioOrdenes.addOrden(newOrden);
-    }
+	@PostMapping
+	public Optional<String> addOrden(@RequestBody Ordenes newOrden) {
+		return servicioOrdenes.addOrden(newOrden);
+	}
 
-    @PutMapping("/{id}")
-    public Optional<String> updateOrden(@PathVariable Long id,
-            @RequestBody Ordenes newData) {
-        return servicioOrdenes.updateOrden(id, newData);
-    }
+	@PutMapping("/{id}")
+	public Optional<String> updateOrden(@PathVariable Long id, @RequestBody Ordenes newData) {
+		return servicioOrdenes.updateOrden(id, newData);
+	}
 
-    @DeleteMapping("/{id}")
-    public Optional<String> deleteOrden(@PathVariable Long id) {
-        return servicioOrdenes.deleteOrdenById(id);
-    }
+	@DeleteMapping("/{id}")
+	public Optional<String> deleteOrden(@PathVariable Long id) {
+		return servicioOrdenes.deleteOrdenById(id);
+	}
+
 }

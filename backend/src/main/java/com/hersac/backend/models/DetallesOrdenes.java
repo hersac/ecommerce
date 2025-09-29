@@ -14,10 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetallesOrdenes {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long detallesOCId;
-    private Long ordenId;
-    private Long prodId;
-    private Integer cantidad;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long detallesOCId;
+
+	private Long ordenId;
+
+	private Long prodId;
+
+	private Integer cantidad;
+
 }

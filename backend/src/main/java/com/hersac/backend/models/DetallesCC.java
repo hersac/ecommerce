@@ -14,12 +14,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DetallesCC {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long detalleId;
-    private String identificacion;
-    private Long prodId;
-    private Integer cantidad;
-    private Double precioUnitario;
-    private Double subtotal;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long detalleId;
+
+	private String identificacion;
+
+	private Long prodId;
+
+	private Integer cantidad;
+
+	private Double precioUnitario;
+
+	private Double subtotal;
+
 }

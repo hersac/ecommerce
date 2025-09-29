@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.hersac.backend.models.CarritoCompras;
 
 @Repository
-public interface CarritoComprasRepository
-        extends
-            JpaRepository<CarritoCompras, Long> {
+public interface CarritoComprasRepository extends JpaRepository<CarritoCompras, Long> {
 
 }

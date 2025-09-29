@@ -15,15 +15,17 @@ import jakarta.transaction.Transactional;
 
 @Component
 public class Autoruns implements CommandLineRunner {
-    @Autowired
-    private UsuariosRepository usuariosRepo;
 
-    @Override
-    @Transactional
-    public void run(String... args) throws Exception {
-        Date fechaHoy = new Date();
-        List<Usuarios> defaultUsuarios = Arrays.asList(new Usuarios(null,
-                "admin", "admin", "Admin", "", "", "", "", fechaHoy, ""));
-        usuariosRepo.saveAll(defaultUsuarios);
-    }
+	@Autowired
+	private UsuariosRepository usuariosRepo;
+
+	@Override
+	@Transactional
+	public void run(String... args) throws Exception {
+		Date fechaHoy = new Date();
+		List<Usuarios> defaultUsuarios = Arrays
+			.asList(new Usuarios(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, ""));
+		usuariosRepo.saveAll(defaultUsuarios);
+	}
+
 }

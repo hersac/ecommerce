@@ -16,11 +16,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarritoCompras {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long carritoId;
-    private Long userId;
-    private String identificacion;
-    private Date fecha;
-    private Boolean estadoCarrito;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long carritoId;
+
+	private Long userId;
+
+	private String identificacion;
+
+	private Date fecha;
+
+	private Boolean estadoCarrito;
+
 }

@@ -20,32 +20,32 @@ import com.hersac.backend.services.ProductosService;
 @RequestMapping("/api/productos")
 public class ProductosController {
 
-    @Autowired
-    private ProductosService productosServ;
+	@Autowired
+	private ProductosService productosServ;
 
-    @GetMapping
-    public Optional<List<Productos>> getProductos() {
-        return productosServ.getProductos();
-    }
+	@GetMapping
+	public Optional<List<Productos>> getProductos() {
+		return productosServ.getProductos();
+	}
 
-    @GetMapping("/{id}")
-    public Optional<Productos> getProductoById(@PathVariable Long id) {
-        return productosServ.getProductoById(id);
-    }
+	@GetMapping("/{id}")
+	public Optional<Productos> getProductoById(@PathVariable Long id) {
+		return productosServ.getProductoById(id);
+	}
 
-    @PostMapping
-    public Optional<String> addProductos(@RequestBody Productos newProducto) {
-        return productosServ.addProducto(newProducto);
-    }
+	@PostMapping
+	public Optional<String> addProductos(@RequestBody Productos newProducto) {
+		return productosServ.addProducto(newProducto);
+	}
 
-    @PutMapping("/{id}")
-    public Optional<String> updateProducto(@PathVariable Long id,
-            @RequestBody Productos newData) {
-        return productosServ.updateProducto(id, newData);
-    }
+	@PutMapping("/{id}")
+	public Optional<String> updateProducto(@PathVariable Long id, @RequestBody Productos newData) {
+		return productosServ.updateProducto(id, newData);
+	}
 
-    @DeleteMapping("/{id}")
-    public Optional<String> deleteProducto(@PathVariable Long id) {
-        return productosServ.deleteProductoById(id);
-    }
+	@DeleteMapping("/{id}")
+	public Optional<String> deleteProducto(@PathVariable Long id) {
+		return productosServ.deleteProductoById(id);
+	}
+
 }

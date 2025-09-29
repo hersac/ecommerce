@@ -20,34 +20,32 @@ import com.hersac.backend.services.DetallesCCService;
 @RequestMapping("/api/detallesCC")
 public class DetallesCCController {
 
-    @Autowired
-    private DetallesCCService detallesCCService;
+	@Autowired
+	private DetallesCCService detallesCCService;
 
-    @GetMapping
-    public Optional<List<DetallesCC>> getDetallesOrdenes() {
-        return detallesCCService.getDetallesCC();
-    }
+	@GetMapping
+	public Optional<List<DetallesCC>> getDetallesOrdenes() {
+		return detallesCCService.getDetallesCC();
+	}
 
-    @GetMapping("/{id}")
-    public Optional<DetallesCC> getDetallesOrdenesById(@PathVariable Long id) {
-        return detallesCCService.getDetallesCCById(id);
-    }
+	@GetMapping("/{id}")
+	public Optional<DetallesCC> getDetallesOrdenesById(@PathVariable Long id) {
+		return detallesCCService.getDetallesCCById(id);
+	}
 
-    @PostMapping
-    public Optional<String> addDetallesOrdenes(
-            @RequestBody DetallesCC newDetallesOrdenes) {
-        return detallesCCService.addDetallesCC(newDetallesOrdenes);
-    }
+	@PostMapping
+	public Optional<String> addDetallesOrdenes(@RequestBody DetallesCC newDetallesOrdenes) {
+		return detallesCCService.addDetallesCC(newDetallesOrdenes);
+	}
 
-    @PutMapping("/{id}")
-    public Optional<String> updateDetallesOrdenes(@PathVariable Long id,
-            @RequestBody DetallesCC newData) {
-        return detallesCCService.updateDetallesCC(id, newData);
-    }
+	@PutMapping("/{id}")
+	public Optional<String> updateDetallesOrdenes(@PathVariable Long id, @RequestBody DetallesCC newData) {
+		return detallesCCService.updateDetallesCC(id, newData);
+	}
 
-    @DeleteMapping("/{id}")
-    public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
-        return detallesCCService.deleteDetallesCCById(id);
-    }
+	@DeleteMapping("/{id}")
+	public Optional<String> deleteDetallesOrdenes(@PathVariable Long id) {
+		return detallesCCService.deleteDetallesCCById(id);
+	}
 
 }

@@ -19,32 +19,33 @@ import com.hersac.backend.services.ClientesService;
 @RestController
 @RequestMapping("/api/clientes")
 public class ClientesController {
-    @Autowired
-    private ClientesService clientesService;
 
-    @GetMapping
-    public Optional<List<Clientes>> getClientes() {
-        return clientesService.getClientes();
-    }
+	@Autowired
+	private ClientesService clientesService;
 
-    @GetMapping("/{id}")
-    public Optional<Clientes> getClientesById(@PathVariable Long id) {
-        return clientesService.getClientesById(id);
-    }
+	@GetMapping
+	public Optional<List<Clientes>> getClientes() {
+		return clientesService.getClientes();
+	}
 
-    @PostMapping
-    public Optional<String> addClientes(@RequestBody Clientes newClientes) {
-        return clientesService.addClientes(newClientes);
-    }
+	@GetMapping("/{id}")
+	public Optional<Clientes> getClientesById(@PathVariable Long id) {
+		return clientesService.getClientesById(id);
+	}
 
-    @PutMapping("/{id}")
-    public Optional<String> updateClientes(@PathVariable Long id,
-            @RequestBody Clientes newData) {
-        return clientesService.updateClientes(id, newData);
-    }
+	@PostMapping
+	public Optional<String> addClientes(@RequestBody Clientes newClientes) {
+		return clientesService.addClientes(newClientes);
+	}
 
-    @DeleteMapping("/{id}")
-    public Optional<String> deleteClientes(@PathVariable Long id) {
-        return clientesService.deleteClientesById(id);
-    }
+	@PutMapping("/{id}")
+	public Optional<String> updateClientes(@PathVariable Long id, @RequestBody Clientes newData) {
+		return clientesService.updateClientes(id, newData);
+	}
+
+	@DeleteMapping("/{id}")
+	public Optional<String> deleteClientes(@PathVariable Long id) {
+		return clientesService.deleteClientesById(id);
+	}
+
 }

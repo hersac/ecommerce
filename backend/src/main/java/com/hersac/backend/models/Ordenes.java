@@ -16,11 +16,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Ordenes {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ordenId;
-    private Long userId;
-    private Date FechaOrden;
-    private String direccionEnvio;
-    private Boolean estadoOrden;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ordenId;
+
+	private Long userId;
+
+	private Date FechaOrden;
+
+	private String direccionEnvio;
+
+	private Boolean estadoOrden;
+
 }

@@ -20,34 +20,32 @@ import com.hersac.backend.services.CarritoComprasService;
 @RequestMapping("/api/carritoCompras")
 public class CarritoComprasController {
 
-    @Autowired
-    private CarritoComprasService carritoComprasService;
+	@Autowired
+	private CarritoComprasService carritoComprasService;
 
-    @GetMapping
-    public Optional<List<CarritoCompras>> getCarritoCompras() {
-        return carritoComprasService.getCarritoCompras();
-    }
+	@GetMapping
+	public Optional<List<CarritoCompras>> getCarritoCompras() {
+		return carritoComprasService.getCarritoCompras();
+	}
 
-    @GetMapping("/{id}")
-    public Optional<CarritoCompras> getCarritoComprasById(
-            @PathVariable Long id) {
-        return carritoComprasService.getCarritoComprasById(id);
-    }
+	@GetMapping("/{id}")
+	public Optional<CarritoCompras> getCarritoComprasById(@PathVariable Long id) {
+		return carritoComprasService.getCarritoComprasById(id);
+	}
 
-    @PostMapping
-    public Optional<String> addCarritoCompras(
-            @RequestBody CarritoCompras newCarritoCompras) {
-        return carritoComprasService.addCarritoCompras(newCarritoCompras);
-    }
+	@PostMapping
+	public Optional<String> addCarritoCompras(@RequestBody CarritoCompras newCarritoCompras) {
+		return carritoComprasService.addCarritoCompras(newCarritoCompras);
+	}
 
-    @PutMapping("/{id}")
-    public Optional<String> updateCarritoCompras(@PathVariable Long id,
-            @RequestBody CarritoCompras newData) {
-        return carritoComprasService.updateCarritoCompras(id, newData);
-    }
+	@PutMapping("/{id}")
+	public Optional<String> updateCarritoCompras(@PathVariable Long id, @RequestBody CarritoCompras newData) {
+		return carritoComprasService.updateCarritoCompras(id, newData);
+	}
 
-    @DeleteMapping("/{id}")
-    public Optional<String> deleteCarritoCompras(@PathVariable Long id) {
-        return carritoComprasService.deleteCarritoComprasById(id);
-    }
+	@DeleteMapping("/{id}")
+	public Optional<String> deleteCarritoCompras(@PathVariable Long id) {
+		return carritoComprasService.deleteCarritoComprasById(id);
+	}
+
 }

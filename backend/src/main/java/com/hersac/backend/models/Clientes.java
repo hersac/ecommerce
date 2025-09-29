@@ -14,13 +14,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Clientes {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clienteId;
-    private String primerNombre;
-    private String segundoNombre;
-    private String primerApellido;
-    private String segundoApellido;
-    private String tipoDocumento;
-    private String identificacion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long clienteId;
+
+	private String primerNombre;
+
+	private String segundoNombre;
+
+	private String primerApellido;
+
+	private String segundoApellido;
+
+	private String tipoDocumento;
+
+	private String identificacion;
+
 }

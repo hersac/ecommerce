@@ -16,16 +16,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Usuarios {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-    private String email;
-    private String password;
-    private String primerNombre;
-    private String segundoNombre;
-    private String primerApellido;
-    private String segundoApellido;
-    private String identificacion;
-    private Date cumpleaños;
-    private String direccion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long userId;
+
+	private String email;
+
+	private String password;
+
+	private String primerNombre;
+
+	private String segundoNombre;
+
+	private String primerApellido;
+
+	private String segundoApellido;
+
+	private String identificacion;
+
+	private Date cumpleaños;
+
+	private String direccion;
+
 }

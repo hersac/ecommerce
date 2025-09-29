@@ -12,10 +12,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MicroGlobalException extends RuntimeException {
-    private HttpStatus httpStatusCode;
-    private String message;
 
-    public MicroGlobalException(String message) {
-        super(message);
-    }
+	private HttpStatus httpStatusCode;
+
+	private String message;
+
+	public MicroGlobalException(String message) {
+		super(message);
+	}
+
 }
