@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class CarritoCompras {
+public class CarritoCompras extends EntidadAuditable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
