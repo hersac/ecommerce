@@ -38,7 +38,7 @@ public class PermisosController {
 
 	@PostMapping
 	public Permiso crear(@RequestBody Permiso nuevoPermiso) {
-		return permisosService.crear(nuevoPermiso);
+		return permisosService.crear(nuevoPermiso).get();
 	}
 
 	@PutMapping("/{id}")
@@ -50,7 +50,8 @@ public class PermisosController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-		return permisosService.eliminar(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+		return permisosService.eliminar(id).get() ? ResponseEntity.noContent().build()
+				: ResponseEntity.notFound().build();
 	}
 
 	@GetMapping("/nombre/{nombre}")

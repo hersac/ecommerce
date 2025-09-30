@@ -1,8 +1,9 @@
 package com.hersac.backend.modules.comercial.carritocompras;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,28 +27,35 @@ public class CarritoComprasController {
 	}
 
 	@GetMapping
-	public Optional<List<CarritoCompras>> buscarTodos() {
-		return carritoComprasService.buscarTodos();
+	public ResponseEntity<List<CarritoCompras>> buscarTodos() {
+		List<CarritoCompras> carritoCompras = carritoComprasService.buscarTodos();
+		return ResponseEntity.ok().body(carritoCompras);
 	}
 
 	@GetMapping("/{id}")
-	public Optional<CarritoCompras> buscarPorId(@PathVariable Long id) {
-		return carritoComprasService.buscarPorId(id);
+	public ResponseEntity<CarritoCompras> buscarPorId(@PathVariable Long id) {
+		CarritoCompras carritoCompras = carritoComprasService.buscarPorId(id);
+		return ResponseEntity.ok().body(carritoCompras);
+
 	}
 
 	@PostMapping
-	public Optional<String> crear(@RequestBody CarritoCompras newCarritoCompras) {
-		return carritoComprasService.crear(newCarritoCompras);
+	public ResponseEntity<CarritoCompras> crear(@RequestBody CarritoCompras newCarritoCompras) {
+		CarritoCompras carritoCompras = carritoComprasService.crear(newCarritoCompras);
+		return ResponseEntity.status(HttpStatus.CREATED).body(carritoCompras);
+
 	}
 
 	@PutMapping("/{id}")
-	public Optional<String> actualizar(@PathVariable Long id, @RequestBody CarritoCompras newData) {
-		return carritoComprasService.actualizar(id, newData);
+	public ResponseEntity<Void> actualizar(@PathVariable Long id, @RequestBody CarritoCompras newData) {
+		carritoComprasService.actualizar(id, newData);
+		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping("/{id}")
-	public Optional<String> eliminar(@PathVariable Long id) {
-		return carritoComprasService.eliminar(id);
+	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+		carritoComprasService.eliminar(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

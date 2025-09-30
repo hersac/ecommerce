@@ -29,8 +29,8 @@ public class PermisosServiceImpl implements PermisosService {
 	}
 
 	@Override
-	public Permiso crear(Permiso nuevoPermiso) {
-		return permisoRepo.save(nuevoPermiso);
+	public Optional<Permiso> crear(Permiso nuevoPermiso) {
+		return Optional.of(permisoRepo.save(nuevoPermiso));
 	}
 
 	@Override
@@ -42,11 +42,11 @@ public class PermisosServiceImpl implements PermisosService {
 	}
 
 	@Override
-	public boolean eliminar(Long id) {
-		return permisoRepo.findById(id).map(p -> {
+	public Optional<Boolean> eliminar(Long id) {
+		return Optional.of(permisoRepo.findById(id).map(p -> {
 			permisoRepo.delete(p);
 			return true;
-		}).orElse(false);
+		}).orElse(false));
 	}
 
 	@Override

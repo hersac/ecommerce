@@ -1,62 +1,64 @@
 package com.hersac.backend.modules.comercial.carritocompras.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.hersac.backend.globals.exceptions.CarritoComprasNotFoundException;
 import com.hersac.backend.modules.comercial.carritocompras.models.CarritoCompras;
 import com.hersac.backend.modules.comercial.carritocompras.models.repositories.CarritoComprasRepository;
 import com.hersac.backend.modules.comercial.carritocompras.services.CarritosComprasService;
+import com.hersac.backend.modules.users.usuarios.models.Usuario;
+import com.hersac.backend.modules.users.usuarios.models.repositories.UsuarioRepository;
 
 @Service
 public class CarritosComprasServiceImpl implements CarritosComprasService {
 
 	private final CarritoComprasRepository carritoComprasRepo;
 
-	public CarritosComprasServiceImpl(CarritoComprasRepository carritoComprasRepo) {
+	private final UsuarioRepository usuarioRepo;
+
+	public CarritosComprasServiceImpl(CarritoComprasRepository carritoComprasRepo, UsuarioRepository usuarioRepo) {
 		this.carritoComprasRepo = carritoComprasRepo;
+		this.usuarioRepo = usuarioRepo;
 	}
 
 	@Override
-	public Optional<List<CarritoCompras>> buscarTodos() {
-		return Optional.ofNullable(carritoComprasRepo.findAll());
+	public List<CarritoCompras> buscarTodos() {
+		return carritoComprasRepo.findAll();
 	}
 
 	@Override
-	public Optional<CarritoCompras> buscarPorId(Long id) {
-		Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-		if (!carritoCompras.isPresent())
-			throw new RuntimeException("Carrito de compras no encontrado");
-		return carritoCompras;
+	public CarritoCompras buscarPorId(Long id) {
+		return carritoComprasRepo.findById(id)
+			.orElseThrow(() -> new CarritoComprasNotFoundException("Carrito de compras no encontrado"));
 	}
 
 	@Override
-	public Optional<String> crear(CarritoCompras nuevoCarritoCompra) {
-		carritoComprasRepo.save(nuevoCarritoCompra);
-		return Optional.of("Carrito de compras agregado");
+	public CarritoCompras crear(CarritoCompras nuevoCarritoCompra) {
+		return carritoComprasRepo.save(nuevoCarritoCompra);
 	}
 
 	@Override
-	public Optional<String> actualizar(Long id, CarritoCompras nuevaData) {
-		Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-		if (!carritoCompras.isPresent())
-			throw new RuntimeException("Carrito de compras no encontrado");
-		carritoCompras.get().setUserId(nuevaData.getUserId());
-		carritoCompras.get().setIdentificacion(nuevaData.getIdentificacion());
-		carritoCompras.get().setFecha(nuevaData.getFecha());
-		carritoCompras.get().setEstadoCarrito(nuevaData.getEstadoCarrito());
-		carritoComprasRepo.save(carritoCompras.get());
-		return Optional.of("Carrito de compras actualizado");
+	public CarritoCompras actualizar(Long id, CarritoCompras nuevaData) {
+		CarritoCompras carrito = carritoComprasRepo.findById(id)
+			.orElseThrow(() -> new CarritoComprasNotFoundException("Carrito de compras no encontrado"));
+
+		Usuario usuario = usuarioRepo.findById(nuevaData.getUsuarioId().getUserId())
+			.orElseThrow(() -> new CarritoComprasNotFoundException("Usuario no encontrado"));
+
+		carrito.setIdentificacion(nuevaData.getIdentificacion());
+		carrito.setEstado(nuevaData.getEstado());
+		carrito.setUsuarioId(usuario);
+
+		return carritoComprasRepo.save(carrito);
 	}
 
 	@Override
-	public Optional<String> eliminar(Long id) {
-		Optional<CarritoCompras> carritoCompras = carritoComprasRepo.findById(id);
-		if (!carritoCompras.isPresent())
-			throw new RuntimeException("Carrito de compras no encontrado");
-		carritoComprasRepo.deleteById(id);
-		return Optional.of("Carrito de compras eliminado");
+	public void eliminar(Long id) {
+		CarritoCompras carrito = carritoComprasRepo.findById(id)
+			.orElseThrow(() -> new CarritoComprasNotFoundException("Carrito de compras no encontrado"));
+		carritoComprasRepo.delete(carrito);
 	}
 
 }

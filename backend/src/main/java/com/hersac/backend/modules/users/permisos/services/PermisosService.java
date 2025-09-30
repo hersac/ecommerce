@@ -11,11 +11,11 @@ public interface PermisosService {
 
 	Optional<Permiso> buscarPorId(Long id);
 
-	Permiso crear(Permiso nuevoPermiso);
+	Optional<Permiso> crear(Permiso nuevoPermiso);
 
 	Optional<Permiso> actualizar(Long id, Permiso nuevaData);
 
-	boolean eliminar(Long id);
+	Optional<Boolean> eliminar(Long id);
 
 	Optional<Permiso> buscarPorNombre(String name);
 
