@@ -1,12 +1,13 @@
 package com.hersac.backend.utils;
 
-import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 import com.hersac.backend.modules.users.roles.models.Rol;
 import com.hersac.backend.modules.users.roles.models.repositories.RolRepository;
 import com.hersac.backend.modules.users.usuarios.models.Usuario;
@@ -26,21 +27,25 @@ public class Autoruns implements CommandLineRunner {
 		this.rolesRepo = rolesRepo;
 	}
 
-	Date fechaHoy = new Date();
-
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
+		Rol adminRol = rolesRepo.findByNombreRol("Administrador").orElseGet(() -> {
+			Rol nuevoRol = new Rol(null, "Administrador");
+			return rolesRepo.save(nuevoRol);
+		});
 
-		List<Rol> defaultRoles = Arrays.asList(new Rol(null, "Administrador"));
-		rolesRepo.saveAll(defaultRoles);
+		String prueba = Base64.getEncoder().encodeToString("admin:admin".getBytes());
+		System.out.println(prueba);
 
-		Date fechaHoy = new Date();
-		Rol admin = rolesRepo.findById(1L).get();
+		Optional<Usuario> adminExistente = usuariosRepo.findByEmail("admin");
+		String hashedPassword = BCryptUtil.hashPassword("admin");
 
-		List<Usuario> defaultUsuarios = Arrays
-			.asList(new Usuario(null, "admin", "admin", "Admin", "", "", "", "", fechaHoy, "", admin));
-		usuariosRepo.saveAll(defaultUsuarios);
+		if (adminExistente.isEmpty()) {
+			Date fechaHoy = new Date();
+			Usuario admin = new Usuario(null, "admin", hashedPassword, "Admin", "", "", "", "", fechaHoy, "", adminRol);
+			usuariosRepo.save(admin);
+		}
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.hersac.backend.modules.comercial.carritocompras.models;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hersac.backend.common.auditoria.EntidadAuditable;
 import com.hersac.backend.modules.users.usuarios.models.Usuario;
@@ -34,8 +32,11 @@ public class CarritoCompras extends EntidadAuditable {
 	@Column(name = "identificacion")
 	private String identificacion;
 
+	@Column(name = "esta_activo")
+	private Boolean estaActivo = true;
+
 	@Column(name = "estado")
-	private Boolean estado;
+	private String estado;
 
 	// Relaciones
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -6,6 +6,7 @@ import com.hersac.backend.modules.users.usuarios.models.repositories.UsuarioRepo
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ public class AuditoriaUsuarioActual implements AuditorAware<Usuario> {
 	}
 
 	@Override
+	@NonNull
 	public Optional<Usuario> getCurrentAuditor() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
