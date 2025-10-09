@@ -2,19 +2,19 @@ package com.hersac.backend.modules.comercial.carritocompras.services;
 
 import java.util.List;
 
-import com.hersac.backend.modules.comercial.carritocompras.dto.ActualizarCarritoCompras;
-import com.hersac.backend.modules.comercial.carritocompras.dto.CrearCarritoCompras;
-import com.hersac.backend.modules.comercial.carritocompras.dto.ResponseCarritoCompras;
+import com.hersac.backend.modules.comercial.carritocompras.dto.ActualizarCarritoComprasDTO;
+import com.hersac.backend.modules.comercial.carritocompras.dto.CrearCarritoComprasDTO;
+import com.hersac.backend.modules.comercial.carritocompras.dto.ResponseCarritoComprasDTO;
 
 public interface CarritosComprasService {
 
-	public List<ResponseCarritoCompras> buscarTodos();
+	public List<ResponseCarritoComprasDTO> buscarTodos();
 
-	public ResponseCarritoCompras buscarPorId(Long id);
+	public ResponseCarritoComprasDTO buscarPorId(Long id);
 
-	public ResponseCarritoCompras crear(CrearCarritoCompras nuevoCarritoCompra);
+	public ResponseCarritoComprasDTO crear(CrearCarritoComprasDTO nuevoCarritoCompra);
 
-	public ResponseCarritoCompras actualizar(Long id, ActualizarCarritoCompras nuevaData);
+	public ResponseCarritoComprasDTO actualizar(Long id, ActualizarCarritoComprasDTO nuevaData);
 
 	public void eliminar(Long id);
 

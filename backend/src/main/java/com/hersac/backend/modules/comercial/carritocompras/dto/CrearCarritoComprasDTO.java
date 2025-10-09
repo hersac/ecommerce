@@ -2,7 +2,6 @@ package com.hersac.backend.modules.comercial.carritocompras.dto;
 
 import com.hersac.backend.common.validation.OnCreate;
 import com.hersac.backend.common.validation.OnUpdate;
-import com.hersac.backend.modules.users.usuarios.models.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -16,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CrearCarritoCompras {
+public class CrearCarritoComprasDTO {
 
 	@Pattern(regexp = "^[0-9]+$", message = "El campo 'identificacion' solo debe contener números.",
 			groups = { OnCreate.class, OnUpdate.class })

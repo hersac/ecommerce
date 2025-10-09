@@ -5,6 +5,11 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.hersac.backend.globals.exceptions.ClienteNotFoundException;
+import com.hersac.backend.modules.comercial.clientes.dto.ActualizarClienteDTO;
+import com.hersac.backend.modules.comercial.clientes.dto.CrearClienteDTO;
+import com.hersac.backend.modules.comercial.clientes.dto.ResponseClienteDTO;
+import com.hersac.backend.modules.comercial.clientes.mappers.ClienteMappers;
 import com.hersac.backend.modules.comercial.clientes.models.Cliente;
 import com.hersac.backend.modules.comercial.clientes.models.repositories.ClienteRepository;
 import com.hersac.backend.modules.comercial.clientes.services.ClientesService;
@@ -14,34 +19,49 @@ public class ClientesServiceImpl implements ClientesService {
 
 	private final ClienteRepository clienteRepo;
 
-	public ClientesServiceImpl(ClienteRepository clienteRepo) {
+	private final ClienteMappers clienteMappers;
+
+	public ClientesServiceImpl(ClienteRepository clienteRepo, ClienteMappers clienteMappers) {
 		this.clienteRepo = clienteRepo;
+		this.clienteMappers = clienteMappers;
 	}
 
 	@Override
-	public Optional<List<Cliente>> buscarTodos() {
-		return Optional.ofNullable(clienteRepo.findAll());
+	public List<ResponseClienteDTO> buscarTodos() {
+		List<Cliente> clientes = clienteRepo.findAll();
+		List<ResponseClienteDTO> response = clienteMappers.toDto(clientes);
+		return response;
 	}
 
 	@Override
-	public Optional<Cliente> buscarPorId(Long id) {
+	public ResponseClienteDTO buscarPorId(Long id) {
 		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
-			throw new RuntimeException("Cliente no encontrado");
-		return clienteRepo.findById(id);
+			throw new ClienteNotFoundException("Cliente no encontrado");
+
+		return clienteMappers.toDto(cliente.get());
 	}
 
 	@Override
-	public Optional<String> crear(Cliente nuevoCliente) {
-		clienteRepo.save(nuevoCliente);
-		return Optional.of("Cliente agregado");
+	public ResponseClienteDTO buscarPorIdentificacion(String identificacion) {
+		Optional<Cliente> cliente = clienteRepo.findByIdentificacion(identificacion);
+		if (!cliente.isPresent())
+			throw new ClienteNotFoundException("Cliente no encontrado");
+		return clienteMappers.toDto(cliente.get());
 	}
 
 	@Override
-	public Optional<String> actualizar(Long id, Cliente nuevaData) {
+	public ResponseClienteDTO crear(CrearClienteDTO nuevoCliente) {
+		Cliente cliente = clienteMappers.toEntity(nuevoCliente);
+		cliente = clienteRepo.save(cliente);
+		return clienteMappers.toDto(cliente);
+	}
+
+	@Override
+	public ResponseClienteDTO actualizar(Long id, ActualizarClienteDTO nuevaData) {
 		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
-			throw new RuntimeException("Cliente no encontrado");
+			throw new ClienteNotFoundException("Cliente no encontrado");
 		cliente.get().setPrimerNombre(nuevaData.getPrimerNombre());
 		cliente.get().setSegundoNombre(nuevaData.getSegundoNombre());
 		cliente.get().setPrimerApellido(nuevaData.getPrimerApellido());
@@ -49,16 +69,15 @@ public class ClientesServiceImpl implements ClientesService {
 		cliente.get().setTipoDocumento(nuevaData.getTipoDocumento());
 		cliente.get().setIdentificacion(nuevaData.getIdentificacion());
 		clienteRepo.save(cliente.get());
-		return Optional.of("Cliente actualizado");
+		return clienteMappers.toDto(cliente.get());
 	}
 
 	@Override
-	public Optional<String> eliminar(Long id) {
+	public void eliminar(Long id) {
 		Optional<Cliente> cliente = clienteRepo.findById(id);
 		if (!cliente.isPresent())
-			throw new RuntimeException("Cliente no encontrado");
+			throw new ClienteNotFoundException("Cliente no encontrado");
 		clienteRepo.deleteById(id);
-		return Optional.of("Cliente eliminado");
 	}
 
 }

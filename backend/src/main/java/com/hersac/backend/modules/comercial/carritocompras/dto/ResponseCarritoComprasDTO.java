@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseCarritoCompras {
+public class ResponseCarritoComprasDTO {
 
 	private Long id;
 
