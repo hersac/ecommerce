@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseClienteDTO {
 
-    private Long id;
+	private Long id;
 
-    private String primerNombre;
+	private String primerNombre;
 
-    private String segundoNombre;
+	private String segundoNombre;
 
-    private String primerApellido;
+	private String primerApellido;
 
-    private String segundoApellido;
+	private String segundoApellido;
 
-    private String tipoDocumento;
+	private String tipoDocumento;
 
-    private String identificacion;
+	private String identificacion;
 
 }

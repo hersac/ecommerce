@@ -15,11 +15,12 @@ import com.hersac.backend.modules.comercial.clientes.models.Cliente;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClienteMappers {
 
-    @Mapping(target = "clienteId", ignore = true)
-    Cliente toEntity(CrearClienteDTO dto);
+	@Mapping(target = "clienteId", ignore = true)
+	Cliente toEntity(CrearClienteDTO dto);
 
-    @Mapping(target = "id", source = "clienteId")
-    ResponseClienteDTO toDto(Cliente entity);
+	@Mapping(target = "id", source = "clienteId")
+	ResponseClienteDTO toDto(Cliente entity);
 
-    List<ResponseClienteDTO> toDto(List<Cliente> entities);
+	List<ResponseClienteDTO> toDto(List<Cliente> entities);
+
 }

@@ -9,5 +9,7 @@ import com.hersac.backend.modules.comercial.clientes.models.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    Optional<Cliente> findByIdentificacion(String identificacion);
+
+	Optional<Cliente> findByIdentificacion(String identificacion);
+
 }

@@ -53,8 +53,7 @@ public class ClientesController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> actualizar(
-			@PathVariable Long id,
+	public ResponseEntity<Void> actualizar(@PathVariable Long id,
 			@Validated(OnUpdate.class) @RequestBody ActualizarClienteDTO nuevaData) {
 		clientesService.actualizar(id, nuevaData);
 		return ResponseEntity.noContent().build();
